@@ -1,0 +1,22 @@
+{
+  "name": "scryfall-query-generator",
+  "version": "1.0.0",
+  "description": "A fluent API for building Scryfall search queries for Magic: The Gathering cards",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "scryfall",
+    "mtg",
+    "magic",
+    "cards",
+    "query",
+    "search"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
