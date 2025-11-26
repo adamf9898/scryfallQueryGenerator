@@ -491,7 +491,6 @@ let config = null;
 let builder = new ScryfallQueryBuilder();
 let selectedKeywords = new Set();
 let selectedIsFilters = new Set();
-let selectedNotFilters = new Set();
 
 /**
  * Initialize the web app
@@ -642,8 +641,6 @@ function toggleIsFilter(element, filter) {
     selectedIsFilters.delete(filter);
     element.classList.remove('selected');
   } else {
-    // Remove from not filters if present
-    selectedNotFilters.delete(filter);
     selectedIsFilters.add(filter);
     element.classList.add('selected');
   }
@@ -762,12 +759,9 @@ function updateQuery() {
     builder.keyword(keyword);
   });
   
-  // Is/Not filters
+  // Is filters
   selectedIsFilters.forEach(filter => {
     builder.is(filter);
-  });
-  selectedNotFilters.forEach(filter => {
-    builder.not(filter);
   });
   
   // Frame
@@ -864,9 +858,8 @@ function resetForm() {
     tag.classList.remove('selected');
   });
   
-  // Clear is/not filters
+  // Clear is filters
   selectedIsFilters.clear();
-  selectedNotFilters.clear();
   document.querySelectorAll('#is-filters-container .keyword-tag').forEach(tag => {
     tag.classList.remove('selected');
   });
