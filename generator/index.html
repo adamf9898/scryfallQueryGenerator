@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scryfall Query Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔮 Scryfall Query Generator</h1>
+      <p>Build powerful search queries for Magic: The Gathering cards</p>
+    </header>
+
+    <main class="main-content">
+      <!-- Left Column - Form -->
+      <div class="form-column">
+        <form id="query-form">
+          
+          <!-- Card Name & Text -->
+          <div class="card">
+            <h2>Card Name & Text</h2>
+            <div class="form-group">
+              <label for="card-name">Card Name</label>
+              <input type="text" id="card-name" placeholder="e.g., Lightning Bolt">
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="exact-match"> Exact name match
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="oracle-text">Oracle Text (Rules Text)</label>
+              <input type="text" id="oracle-text" placeholder="e.g., draw a card">
+            </div>
+            <div class="form-group">
+              <label for="flavor-text">Flavor Text</label>
+              <input type="text" id="flavor-text" placeholder="e.g., doom">
+            </div>
+          </div>
+
+          <!-- Type & Color -->
+          <div class="card">
+            <h2>Type & Color</h2>
+            <div class="form-group">
+              <label for="type">Card Type</label>
+              <select id="type">
+                <option value="">Any type</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Colors</label>
+              <div class="color-options">
+                <label class="color-checkbox">
+                  <input type="checkbox" value="w">
+                  <span class="color-indicator white">W</span>
+                  <span>White</span>
+                </label>
+                <label class="color-checkbox">
+                  <input type="checkbox" value="u">
+                  <span class="color-indicator blue">U</span>
+                  <span>Blue</span>
+                </label>
+                <label class="color-checkbox">
+                  <input type="checkbox" value="b">
+                  <span class="color-indicator black">B</span>
+                  <span>Black</span>
+                </label>
+                <label class="color-checkbox">
+                  <input type="checkbox" value="r">
+                  <span class="color-indicator red">R</span>
+                  <span>Red</span>
+                </label>
+                <label class="color-checkbox">
+                  <input type="checkbox" value="g">
+                  <span class="color-indicator green">G</span>
+                  <span>Green</span>
+                </label>
+                <label class="color-checkbox">
+                  <input type="checkbox" value="c">
+                  <span class="color-indicator colorless">C</span>
+                  <span>Colorless</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="color-mode">Color Search Mode</label>
+                <select id="color-mode">
+                  <option value="color">Card Color</option>
+                  <option value="identity">Color Identity</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="color-operator">Operator</label>
+                <select id="color-operator" class="operator-select">
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mana & Stats -->
+          <div class="card">
+            <h2>Mana & Stats</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="mana-value">Mana Value</label>
+                <input type="number" id="mana-value" min="0" placeholder="e.g., 3">
+              </div>
+              <div class="form-group">
+                <label for="mana-value-operator">Operator</label>
+                <select id="mana-value-operator" class="operator-select">
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="power">Power</label>
+                <input type="number" id="power" placeholder="e.g., 4">
+              </div>
+              <div class="form-group">
+                <label for="power-operator">Operator</label>
+                <select id="power-operator" class="operator-select">
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="toughness">Toughness</label>
+                <input type="number" id="toughness" placeholder="e.g., 4">
+              </div>
+              <div class="form-group">
+                <label for="toughness-operator">Operator</label>
+                <select id="toughness-operator" class="operator-select">
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rarity & Set -->
+          <div class="card">
+            <h2>Rarity & Set</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rarity">Rarity</label>
+                <select id="rarity">
+                  <option value="">Any rarity</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="rarity-operator">Operator</label>
+                <select id="rarity-operator" class="operator-select">
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="set">Set Code</label>
+              <input type="text" id="set" placeholder="e.g., dom, m21, neo">
+            </div>
+          </div>
+
+          <!-- Format -->
+          <div class="card">
+            <h2>Format Legality</h2>
+            <div class="form-group">
+              <label for="format">Format</label>
+              <select id="format">
+                <option value="">Any format</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Advanced Options (Collapsible) -->
+          <div class="card">
+            <h2 class="collapsible">Advanced Options</h2>
+            <div class="collapsible-content">
+              <div class="form-group">
+                <label for="artist">Artist</label>
+                <input type="text" id="artist" placeholder="e.g., John Avon">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="frame">Frame</label>
+                  <select id="frame">
+                    <option value="">Any frame</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="border">Border</label>
+                  <select id="border">
+                    <option value="">Any border</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="price-usd">Price (USD)</label>
+                  <input type="number" id="price-usd" min="0" step="0.01" placeholder="e.g., 10">
+                </div>
+                <div class="form-group">
+                  <label for="price-usd-operator">Operator</label>
+                  <select id="price-usd-operator" class="operator-select">
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Keywords -->
+          <div class="card">
+            <h2 class="collapsible">Keywords</h2>
+            <div class="collapsible-content">
+              <p style="color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.9rem;">Click to select keywords:</p>
+              <div id="keywords-container" class="keyword-tags">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Is/Not Filters -->
+          <div class="card">
+            <h2 class="collapsible">Card Properties (is:)</h2>
+            <div class="collapsible-content">
+              <p style="color: var(--text-secondary); margin-bottom: 0.5rem; font-size: 0.9rem;">Click to filter by properties:</p>
+              <div id="is-filters-container" class="keyword-tags">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Raw Query -->
+          <div class="card">
+            <h2 class="collapsible collapsed">Raw Query</h2>
+            <div class="collapsible-content collapsed">
+              <div class="form-group">
+                <label for="raw-query">Add Raw Query Text</label>
+                <input type="text" id="raw-query" placeholder="e.g., game:paper">
+              </div>
+              <p style="color: var(--text-secondary); font-size: 0.85rem;">
+                Add any custom Scryfall syntax that isn't covered by the form above.
+                <a href="https://scryfall.com/docs/syntax" target="_blank">Syntax Reference</a>
+              </p>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Right Column - Output -->
+      <div class="output-column">
+        <div class="card query-output">
+          <h2>Generated Query</h2>
+          <div id="query-display" class="query-display"></div>
+          
+          <h2 style="margin-top: 1.5rem;">Scryfall URL</h2>
+          <div id="url-display" class="url-display"></div>
+          
+          <div class="button-group">
+            <button type="button" id="search-btn" class="btn btn-primary">
+              🔍 Search on Scryfall
+            </button>
+            <button type="button" id="copy-btn" class="btn btn-secondary">
+              📋 Copy Query
+            </button>
+            <button type="button" id="copy-url-btn" class="btn btn-secondary">
+              🔗 Copy URL
+            </button>
+            <button type="button" id="reset-btn" class="btn btn-outline">
+              ↩️ Reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        Built with the <a href="https://github.com/adamf9898/scryfallQueryGenerator">Scryfall Query Generator</a> library.
+        <br>
+        <a href="https://scryfall.com" target="_blank">Scryfall</a> is a trademark of Scryfall LLC.
+        Magic: The Gathering is a trademark of Wizards of the Coast.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Notification -->
+  <div id="notification" class="notification"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

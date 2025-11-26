@@ -1,0 +1,92 @@
+{
+  "colors": [
+    { "code": "w", "name": "White" },
+    { "code": "u", "name": "Blue" },
+    { "code": "b", "name": "Black" },
+    { "code": "r", "name": "Red" },
+    { "code": "g", "name": "Green" },
+    { "code": "c", "name": "Colorless" }
+  ],
+  "types": [
+    "Creature",
+    "Instant",
+    "Sorcery",
+    "Enchantment",
+    "Artifact",
+    "Planeswalker",
+    "Land",
+    "Battle",
+    "Legendary"
+  ],
+  "formats": [
+    "standard",
+    "modern",
+    "legacy",
+    "vintage",
+    "commander",
+    "pioneer",
+    "pauper",
+    "historic",
+    "brawl",
+    "alchemy"
+  ],
+  "rarities": [
+    { "code": "common", "name": "Common" },
+    { "code": "uncommon", "name": "Uncommon" },
+    { "code": "rare", "name": "Rare" },
+    { "code": "mythic", "name": "Mythic" }
+  ],
+  "operators": [
+    { "code": "=", "name": "Equals (=)" },
+    { "code": "<", "name": "Less than (<)" },
+    { "code": ">", "name": "Greater than (>)" },
+    { "code": "<=", "name": "Less than or equal (<=)" },
+    { "code": ">=", "name": "Greater than or equal (>=)" }
+  ],
+  "keywords": [
+    "flying",
+    "trample",
+    "haste",
+    "vigilance",
+    "lifelink",
+    "deathtouch",
+    "first strike",
+    "double strike",
+    "hexproof",
+    "indestructible",
+    "menace",
+    "reach",
+    "flash",
+    "defender",
+    "ward"
+  ],
+  "isFilters": [
+    "commander",
+    "spell",
+    "permanent",
+    "historic",
+    "modal",
+    "vanilla",
+    "funny",
+    "booster",
+    "reprint",
+    "promo",
+    "digital",
+    "full art",
+    "foil"
+  ],
+  "borders": [
+    "black",
+    "white",
+    "silver",
+    "gold",
+    "borderless"
+  ],
+  "frames": [
+    "1993",
+    "1997",
+    "2003",
+    "2015",
+    "future"
+  ]
+}
