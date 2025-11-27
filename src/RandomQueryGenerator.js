@@ -14,17 +14,20 @@ class RandomQueryGenerator {
     this.maxRetries = options.maxRetries || 100;
     
     // Configuration for random query generation
+    // Note: Multi-word keywords use spaces internally and are converted to '+' in the final output
     this.config = {
       types: ['creature', 'instant', 'sorcery', 'enchantment', 'artifact', 'planeswalker', 'land', 'battle'],
       colors: ['w', 'u', 'b', 'r', 'g', 'c'],
       formats: ['standard', 'modern', 'legacy', 'vintage', 'commander', 'pioneer', 'pauper', 'historic'],
       rarities: ['common', 'uncommon', 'rare', 'mythic'],
       operators: ['=', '<', '>', '<=', '>='],
-      keywords: ['flying', 'trample', 'haste', 'vigilance', 'lifelink', 'deathtouch', 'first+strike', 'double+strike', 'hexproof', 'indestructible', 'menace', 'reach', 'flash', 'defender', 'ward'],
+      // Multi-word keywords use spaces - they will be converted to '+' in the final output
+      keywords: ['flying', 'trample', 'haste', 'vigilance', 'lifelink', 'deathtouch', 'first strike', 'double strike', 'hexproof', 'indestructible', 'menace', 'reach', 'flash', 'defender', 'ward'],
       isFilters: ['commander', 'spell', 'permanent', 'modal', 'vanilla', 'booster', 'reprint', 'promo', 'foil'],
       borders: ['black', 'white', 'silver', 'gold', 'borderless'],
       frames: ['1993', '1997', '2003', '2015', 'future'],
-      oracleTextPatterns: ['destroy', 'draw', 'counter', 'exile', 'damage', 'life', 'mana', 'token', 'sacrifice', 'discard', 'graveyard', 'battlefield', 'library', 'hand', 'creature', 'enchantment', 'artifact', 'land', 'planeswalker', 'sorcery', 'instant', 'spell', 'permanent', 'player', 'opponent', 'controller', 'owner', 'target', 'choose', 'create', 'put', 'return', 'search', 'shuffle', 'tap', 'untap', 'attack', 'block', 'combat', 'phase', 'turn', 'upkeep', 'end+step'],
+      // Oracle text patterns are single-word terms to search for within card text
+      oracleTextPatterns: ['destroy', 'draw', 'counter', 'exile', 'damage', 'life', 'mana', 'token', 'sacrifice', 'discard', 'graveyard', 'battlefield', 'library', 'hand', 'creature', 'enchantment', 'artifact', 'land', 'planeswalker', 'sorcery', 'instant', 'spell', 'permanent', 'player', 'opponent', 'controller', 'owner', 'target', 'choose', 'create', 'put', 'return', 'search', 'shuffle', 'tap', 'untap', 'attack', 'block', 'combat', 'phase', 'turn', 'upkeep'],
       ...options.config
     };
   }
@@ -57,12 +60,26 @@ class RandomQueryGenerator {
   }
 
   /**
+   * Fisher-Yates shuffle algorithm for proper randomization
+   * @param {Array} arr - Array to shuffle
+   * @returns {Array} New shuffled array
+   */
+  _shuffle(arr) {
+    const result = [...arr];
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
+  /**
    * Get random colors (1-3 colors)
    * @returns {string} Color string (e.g., 'ub', 'wbr')
    */
   _randomColors() {
     const numColors = this._randomInt(1, 3);
-    const shuffled = [...this.config.colors].sort(() => Math.random() - 0.5);
+    const shuffled = this._shuffle(this.config.colors);
     return shuffled.slice(0, numColors).join('');
   }
 
@@ -94,8 +111,8 @@ class RandomQueryGenerator {
       'border'
     ];
     
-    // Shuffle and pick filters
-    const shuffled = [...filterOptions].sort(() => Math.random() - 0.5);
+    // Shuffle and pick filters using Fisher-Yates
+    const shuffled = this._shuffle(filterOptions);
     
     for (let i = 0; i < numFilters && i < shuffled.length; i++) {
       const filter = shuffled[i];
