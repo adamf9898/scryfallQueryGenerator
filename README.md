@@ -10,6 +10,8 @@ npm install scryfall-query-generator
 
 ## Usage
 
+### Query Builder
+
 ```javascript
 const { ScryfallQueryBuilder } = require('scryfall-query-generator');
 
@@ -33,6 +35,42 @@ const url = new ScryfallQueryBuilder()
 // Output: "https://scryfall.com/search?q=t%3Ainstant%20o%3A%22draw%20a%20card%22"
 console.log(url);
 ```
+
+### Random Query Generator
+
+Generate unique Scryfall search queries programmatically:
+
+```javascript
+const { RandomQueryGenerator } = require('scryfall-query-generator');
+
+// Create a random query generator
+const generator = new RandomQueryGenerator();
+
+// Generate a single unique query
+const query = generator.generate();
+// Output: "t:creature+c=r+mv<=3+f:modern"
+console.log(query);
+
+// Generate multiple unique queries
+const queries = generator.generateMultiple(10);
+queries.forEach((q, i) => {
+  console.log(`${i + 1}. ${q}`);
+});
+
+// Use with Scryfall URL
+const url = `https://scryfall.com/search?q=${query}`;
+console.log(url);
+
+// Reset the generator to allow duplicate queries
+generator.reset();
+```
+
+**Features:**
+- Generates unique Scryfall search queries
+- Uses '+' instead of spaces (URL-friendly format)
+- Does not include card names
+- Tracks generated queries to ensure uniqueness
+- Configurable options for query generation
 
 ## API Reference
 
