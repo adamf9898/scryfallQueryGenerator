@@ -426,13 +426,13 @@ class DeckGenerator {
 
     // Check land count
     const landCount = stats.byCategory.land || 0;
-    if (landCount < constraints.minLands) {
+    if (constraints.minLands !== undefined && landCount < constraints.minLands) {
       suggestions.push({
         type: 'warning',
         message: `Land count (${landCount}) is below minimum (${constraints.minLands})`,
         action: 'Add more lands'
       });
-    } else if (landCount > constraints.maxLands) {
+    } else if (constraints.maxLands !== undefined && landCount > constraints.maxLands) {
       suggestions.push({
         type: 'warning',
         message: `Land count (${landCount}) is above maximum (${constraints.maxLands})`,

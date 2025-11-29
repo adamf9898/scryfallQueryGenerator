@@ -19,6 +19,26 @@ A modern, feature-rich web application for building [Scryfall](https://scryfall.
 - **Batch Generation**: Generate multiple queries at once
 - **Quick Actions**: Search, copy, or save queries instantly
 
+### 📦 Card Data Management (NEW!)
+- **Bulk Data Sync**: Download Scryfall's complete MTG card database
+- **Multiple Dataset Types**: Support for Oracle Cards, Default Cards, and All Cards
+- **Local Storage**: Store card data in browser for offline access
+- **Version Control**: Track data freshness with timestamps
+- **Incremental Updates**: Only download when new data is available
+
+### 🔍 Local Search Index (NEW!)
+- **Fast Local Search**: Query your downloaded card data instantly
+- **Full-Text Search**: Search across oracle text and card names
+- **Structured Filters**: Filter by type, color, format, mana value, and more
+- **Indexed Performance**: Pre-built inverted index for fast queries
+
+### 🃏 Deck Configuration Generator (NEW!)
+- **Multiple Formats**: Support for Standard, Modern, Commander, and more
+- **Smart Constraints**: Specify lands, colors, mana curve limits
+- **Batch Generation**: Generate multiple deck configurations at once
+- **Export Options**: Copy deck lists or export to file
+- **Mana Curve Display**: Visual representation of deck curve
+
 ### 📜 Query History
 - **Persistent Storage**: Queries saved in browser localStorage
 - **Quick Access**: Re-use your favorite queries
@@ -71,6 +91,29 @@ npx http-server generator -p 8000
 4. Click **Generate 5 Queries** for multiple options
 5. Use the action buttons to search, copy, or save
 
+### Managing Card Data
+
+1. Switch to the **Card Data** tab
+2. Select your preferred dataset type:
+   - **Oracle Cards**: Unique cards only (recommended for most uses)
+   - **Default Cards**: One card per printing
+   - **All Cards**: All variations and printings
+3. Click **Sync Data** to download the latest data
+4. Click **Build Index** to create the search index
+5. Use the **Search Local Data** section to query your data
+
+### Generating Deck Configurations
+
+1. Switch to the **Deck Builder** tab
+2. Select your desired format (Standard, Modern, Commander, etc.)
+3. Configure constraints:
+   - **Color Identity**: Limit colors (optional)
+   - **Max Mana Value**: Limit curve
+   - **Land Range**: Specify min/max lands
+   - **Must Include**: Cards that must be in the deck
+4. Click **Generate Decks** to create deck configurations
+5. Use **Copy List** or **Export** to save your deck
+
 ### Managing History
 
 1. Switch to the **History** tab
@@ -103,7 +146,11 @@ npx http-server generator -p 8000
 |------|-------------|
 | `index.html` | Main HTML page with the form interface |
 | `styles.css` | CSS styles for the web app |
-| `app.js` | JavaScript code including the ScryfallQueryBuilder class |
+| `app.js` | Main JavaScript code including the ScryfallQueryBuilder class |
+| `bulk-data.js` | Module for downloading and managing Scryfall bulk data |
+| `card-normalizer.js` | Module for parsing and normalizing card data |
+| `card-search-index.js` | Search index with structured and full-text query support |
+| `deck-generator.js` | Combinatorial deck configuration generator |
 | `config.json` | Configuration file with card types, colors, formats, etc. |
 | `queries.json` | Database of 500+ pre-built queries across 20 categories |
 | `manifest.json` | PWA manifest for app installation |
@@ -155,6 +202,92 @@ Contains pre-built queries organized by category:
 - **life_gain**: Life gain queries
 - **protection**: Protection ability queries
 - **interaction**: Interactive spell queries
+
+## API Reference
+
+### BulkDataManager
+
+Manages downloading and storing Scryfall bulk card data.
+
+```javascript
+const manager = new BulkDataManager({
+  datasetType: 'oracle_cards',
+  onProgress: (progress) => console.log(progress)
+});
+
+// Sync data
+await manager.syncBulkData({ forceRefresh: false });
+
+// Get status
+const status = manager.getBulkStatus();
+
+// Get stored data
+const cards = manager.getStoredData();
+```
+
+### CardNormalizer
+
+Parses and normalizes card data.
+
+```javascript
+const normalizer = new CardNormalizer();
+
+// Process cards
+const normalizedCards = normalizer.processCards(rawCards);
+
+// Get deduplicated cards (one per oracle_id)
+const uniqueCards = normalizer.getDeduplicatedCards();
+
+// Get statistics
+const stats = normalizer.getStats();
+```
+
+### CardSearchIndex
+
+Provides fast searching over normalized card data.
+
+```javascript
+const index = new CardSearchIndex();
+
+// Build index
+index.buildIndex(normalizedCards);
+
+// Search
+const results = index.search({
+  text: 'flying',
+  type: 'creature',
+  colors: 'u',
+  colorOperator: '<=',
+  format: 'modern',
+  manaValue: 3,
+  manaValueOperator: '<=',
+  limit: 50
+});
+```
+
+### DeckGenerator
+
+Generates deck configurations based on constraints.
+
+```javascript
+const generator = new DeckGenerator(searchIndex);
+
+// Generate decks
+const result = generator.generateMultiple(
+  { format: 'modern', colorIdentity: 'ub' },
+  { 
+    format: 'modern',
+    colorIdentity: 'ub',
+    maxManaValue: 4,
+    minLands: 20,
+    maxLands: 24
+  },
+  5 // number of decks
+);
+
+// Export deck
+const deckText = generator.exportDeck(result.decks[0], 'text');
+```
 
 ## Browser Compatibility
 

@@ -186,6 +186,14 @@ class BulkDataManager {
     } catch (error) {
       // If storage fails (quota exceeded), try to store a subset
       if (error.name === 'QuotaExceededError') {
+        // Clean up any partial data that may have been stored
+        try {
+          localStorage.removeItem(this.storageKey);
+          localStorage.removeItem(this.metadataKey);
+        } catch (cleanupError) {
+          console.warn('Failed to clean up partial data:', cleanupError);
+        }
+        
         this.onProgress({ 
           status: 'warning', 
           message: 'Storage quota exceeded, storing card index only...' 
