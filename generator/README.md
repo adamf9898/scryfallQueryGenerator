@@ -108,8 +108,12 @@ npx http-server generator -p 8000
 | `queries.json` | Database of 500+ pre-built queries across 20 categories |
 | `manifest.json` | PWA manifest for app installation |
 | `sw.js` | Service worker for offline functionality |
+| `CHANGELOG.md` | Version history and roadmap |
 | `docs/API.md` | API documentation |
 | `docs/DEPLOYMENT.md` | Deployment guide |
+| `docs/SCRYFALL-SYNTAX.md` | Complete Scryfall syntax reference |
+| `examples/lua-integration.lua` | Tabletop Simulator integration example |
+| `examples/advanced-queries.js` | Advanced JavaScript query examples |
 
 ## Configuration
 
@@ -164,6 +168,13 @@ This web app works in all modern browsers:
 
 - [API Documentation](docs/API.md) - Detailed API reference
 - [Deployment Guide](docs/DEPLOYMENT.md) - Hosting and deployment options
+- [Scryfall Syntax Reference](docs/SCRYFALL-SYNTAX.md) - Complete search syntax guide
+- [Changelog](CHANGELOG.md) - Version history and roadmap
+
+## Examples
+
+- [Lua Integration](examples/lua-integration.lua) - Tabletop Simulator integration
+- [Advanced Queries](examples/advanced-queries.js) - JavaScript usage examples
 
 ## Related
 
