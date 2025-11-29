@@ -3,17 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build powerful Scryfall search queries for Magic: The Gathering cards">
+  <meta name="theme-color" content="#6366f1">
   <title>Scryfall Query Generator</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
 </head>
 <body>
   <div class="container">
     <header>
       <h1>🔮 Scryfall Query Generator</h1>
       <p>Build powerful search queries for Magic: The Gathering cards</p>
+      
+      <!-- Tab Navigation -->
+      <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="builder">Query Builder</button>
+        <button class="tab-btn" data-tab="random">Random Queries</button>
+        <button class="tab-btn" data-tab="history">History</button>
+      </nav>
     </header>
 
-    <main class="main-content">
+    <!-- Tab: Query Builder -->
+    <main id="builder-tab" class="main-content tab-content active">
       <!-- Left Column - Form -->
       <div class="form-column">
         <form id="query-form">
@@ -266,6 +278,9 @@
             <button type="button" id="copy-url-btn" class="btn btn-secondary">
               🔗 Copy URL
             </button>
+            <button type="button" id="save-query-btn" class="btn btn-success">
+              💾 Save Query
+            </button>
             <button type="button" id="reset-btn" class="btn btn-outline">
               ↩️ Reset
             </button>
@@ -273,6 +288,90 @@
         </div>
       </div>
     </main>
+
+    <!-- Tab: Random Queries -->
+    <section id="random-tab" class="tab-content">
+      <div class="random-container">
+        <div class="card">
+          <h2>🎲 Random Query Generator</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            Generate random Scryfall queries from 500+ curated searches across 20 categories.
+          </p>
+          
+          <div class="form-group">
+            <label for="random-category">Category</label>
+            <select id="random-category">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+          
+          <div class="button-group">
+            <button type="button" id="generate-random-btn" class="btn btn-primary">
+              🎲 Generate Random Query
+            </button>
+            <button type="button" id="generate-multiple-btn" class="btn btn-secondary">
+              📋 Generate 5 Queries
+            </button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>Random Query Result</h2>
+          <div id="random-query-display" class="query-display"></div>
+          
+          <div id="random-query-url" class="url-display" style="margin-top: 1rem;"></div>
+          
+          <div class="button-group" style="margin-top: 1rem;">
+            <button type="button" id="random-search-btn" class="btn btn-primary">
+              🔍 Search on Scryfall
+            </button>
+            <button type="button" id="random-copy-btn" class="btn btn-secondary">
+              📋 Copy Query
+            </button>
+            <button type="button" id="random-save-btn" class="btn btn-outline">
+              💾 Save to History
+            </button>
+          </div>
+        </div>
+        
+        <div class="card" id="multiple-queries-card" style="display: none;">
+          <h2>Generated Queries</h2>
+          <div id="multiple-queries-list" class="queries-list">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab: History -->
+    <section id="history-tab" class="tab-content">
+      <div class="history-container">
+        <div class="card">
+          <h2>📜 Query History</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            Your saved and recently used queries. History is stored in your browser.
+          </p>
+          
+          <div class="button-group">
+            <button type="button" id="clear-history-btn" class="btn btn-outline">
+              🗑️ Clear History
+            </button>
+            <button type="button" id="export-history-btn" class="btn btn-secondary">
+              📤 Export History
+            </button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>Saved Queries</h2>
+          <div id="history-list" class="queries-list">
+            <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">
+              No saved queries yet. Use the Query Builder or Random Generator to create queries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <p>
