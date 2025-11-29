@@ -720,14 +720,38 @@ function generateMultipleQueries() {
   selectedQueries.forEach((query, i) => {
     const item = document.createElement('div');
     item.className = 'query-item';
-    item.innerHTML = `
-      <div class="query-item-text">${escapeHtml(query)}</div>
-      <div class="query-item-actions">
-        <button class="query-item-btn search" onclick="window.open('https://scryfall.com/search?q=${encodeURIComponent(query)}', '_blank')">🔍</button>
-        <button class="query-item-btn copy" onclick="copyToClipboard('${escapeJs(query)}')">📋</button>
-        <button class="query-item-btn" style="background: var(--success-color);" onclick="addToHistory('${escapeJs(query)}', '${category}')">💾</button>
-      </div>
-    `;
+    
+    const textDiv = document.createElement('div');
+    textDiv.className = 'query-item-text';
+    textDiv.textContent = query;
+    
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'query-item-actions';
+    
+    const searchBtn = document.createElement('button');
+    searchBtn.className = 'query-item-btn search';
+    searchBtn.textContent = '🔍';
+    searchBtn.addEventListener('click', () => {
+      window.open(`https://scryfall.com/search?q=${encodeURIComponent(query)}`, '_blank');
+    });
+    
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'query-item-btn copy';
+    copyBtn.textContent = '📋';
+    copyBtn.addEventListener('click', () => copyToClipboard(query));
+    
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'query-item-btn';
+    saveBtn.style.background = 'var(--success-color)';
+    saveBtn.textContent = '💾';
+    saveBtn.addEventListener('click', () => addToHistory(query, category));
+    
+    actionsDiv.appendChild(searchBtn);
+    actionsDiv.appendChild(copyBtn);
+    actionsDiv.appendChild(saveBtn);
+    
+    item.appendChild(textDiv);
+    item.appendChild(actionsDiv);
     container.appendChild(item);
   });
   
@@ -816,11 +840,11 @@ function renderHistory() {
   if (!container) return;
   
   if (queryHistory.length === 0) {
-    container.innerHTML = `
-      <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">
-        No saved queries yet. Use the Query Builder or Random Generator to create queries.
-      </p>
-    `;
+    const emptyMsg = document.createElement('p');
+    emptyMsg.style.cssText = 'color: var(--text-secondary); text-align: center; padding: 2rem;';
+    emptyMsg.textContent = 'No saved queries yet. Use the Query Builder or Random Generator to create queries.';
+    container.innerHTML = '';
+    container.appendChild(emptyMsg);
     return;
   }
   
@@ -829,15 +853,42 @@ function renderHistory() {
   queryHistory.forEach((item, index) => {
     const div = document.createElement('div');
     div.className = 'query-item';
-    div.innerHTML = `
-      <div class="query-item-text">${escapeHtml(item.query)}</div>
-      <span class="query-item-category">${escapeHtml(item.category)}</span>
-      <div class="query-item-actions">
-        <button class="query-item-btn search" onclick="window.open('https://scryfall.com/search?q=${encodeURIComponent(item.query)}', '_blank')">🔍</button>
-        <button class="query-item-btn copy" onclick="copyToClipboard('${escapeJs(item.query)}')">📋</button>
-        <button class="query-item-btn delete" onclick="removeFromHistory(${index})">🗑️</button>
-      </div>
-    `;
+    
+    const textDiv = document.createElement('div');
+    textDiv.className = 'query-item-text';
+    textDiv.textContent = item.query;
+    
+    const categorySpan = document.createElement('span');
+    categorySpan.className = 'query-item-category';
+    categorySpan.textContent = item.category;
+    
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'query-item-actions';
+    
+    const searchBtn = document.createElement('button');
+    searchBtn.className = 'query-item-btn search';
+    searchBtn.textContent = '🔍';
+    searchBtn.addEventListener('click', () => {
+      window.open(`https://scryfall.com/search?q=${encodeURIComponent(item.query)}`, '_blank');
+    });
+    
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'query-item-btn copy';
+    copyBtn.textContent = '📋';
+    copyBtn.addEventListener('click', () => copyToClipboard(item.query));
+    
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'query-item-btn delete';
+    deleteBtn.textContent = '🗑️';
+    deleteBtn.addEventListener('click', () => removeFromHistory(index));
+    
+    actionsDiv.appendChild(searchBtn);
+    actionsDiv.appendChild(copyBtn);
+    actionsDiv.appendChild(deleteBtn);
+    
+    div.appendChild(textDiv);
+    div.appendChild(categorySpan);
+    div.appendChild(actionsDiv);
     container.appendChild(div);
   });
 }
@@ -907,13 +958,6 @@ function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
-}
-
-/**
- * Escape string for JavaScript
- */
-function escapeJs(text) {
-  return text.replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
 /**

@@ -505,7 +505,7 @@
     "is:funny",
     "is:reserved",
     "is:promo",
-    "is:reprint -is:reprint",
+    "is:firstprinting",
     "is:foil",
     "is:full",
     "is:extended",
