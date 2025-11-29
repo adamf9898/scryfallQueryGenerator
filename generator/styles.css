@@ -552,6 +552,304 @@ footer a:hover {
   margin-bottom: 1rem;
 }
 
+/* Data Management Styles */
+.data-container,
+.deck-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.data-status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.status-item:last-child {
+  border-bottom: none;
+}
+
+.status-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.status-value {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  color: var(--text-primary);
+}
+
+.status-value.success {
+  color: var(--success-color);
+}
+
+.status-value.error {
+  color: var(--error-color);
+}
+
+.status-value.warning {
+  color: #f59e0b;
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border-color);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  width: 0%;
+}
+
+.progress-text {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Search Results */
+.search-results {
+  display: grid;
+  gap: 0.75rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.results-count {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: var(--background);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.2s;
+}
+
+.search-result-item:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+}
+
+.search-result-image {
+  width: 60px;
+  height: 84px;
+  border-radius: 4px;
+  object-fit: cover;
+  background: var(--border-color);
+}
+
+.search-result-info {
+  flex: 1;
+}
+
+.search-result-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.search-result-type {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.search-result-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.search-result-tag {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  background: var(--border-color);
+  border-radius: 4px;
+  color: var(--text-secondary);
+}
+
+.search-result-tag.color-w { background: var(--mtg-white); color: #333; }
+.search-result-tag.color-u { background: var(--mtg-blue); color: white; }
+.search-result-tag.color-b { background: var(--mtg-black); color: white; }
+.search-result-tag.color-r { background: var(--mtg-red); color: white; }
+.search-result-tag.color-g { background: var(--mtg-green); color: white; }
+.search-result-tag.color-c { background: var(--mtg-colorless); color: #333; }
+
+/* Deck Results */
+.deck-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.deck-item {
+  background: var(--background);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--card-background);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.deck-title {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.deck-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.deck-stat {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.deck-stat strong {
+  color: var(--text-primary);
+}
+
+.deck-body {
+  padding: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.deck-category {
+  margin-bottom: 1rem;
+}
+
+.deck-category-title {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.deck-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.deck-card {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--card-background);
+  border-radius: 4px;
+  color: var(--text-primary);
+}
+
+.deck-card-count {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-right: 0.25rem;
+}
+
+.deck-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--card-background);
+  border-top: 1px solid var(--border-color);
+}
+
+.deck-action-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--primary-color);
+  color: white;
+}
+
+.deck-action-btn:hover {
+  background: var(--primary-hover);
+}
+
+.deck-action-btn.secondary {
+  background: var(--secondary-color);
+}
+
+.deck-action-btn.secondary:hover {
+  background: #475569;
+}
+
+/* Mana Curve Chart */
+.mana-curve {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  height: 80px;
+  margin-top: 1rem;
+}
+
+.mana-curve-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mana-curve-fill {
+  width: 100%;
+  background: var(--primary-color);
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: height 0.3s ease;
+}
+
+.mana-curve-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.mana-curve-count {
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
 /* Responsive Tab Adjustments */
 @media (max-width: 600px) {
   .tab-nav {
@@ -573,5 +871,23 @@ footer a:hover {
   
   .query-item-btn {
     flex: 1;
+  }
+
+  .deck-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .deck-stats {
+    justify-content: center;
+  }
+
+  .search-result-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .search-result-meta {
+    justify-content: center;
   }
 }

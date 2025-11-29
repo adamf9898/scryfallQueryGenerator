@@ -20,6 +20,8 @@
       <nav class="tab-nav">
         <button class="tab-btn active" data-tab="builder">Query Builder</button>
         <button class="tab-btn" data-tab="random">Random Queries</button>
+        <button class="tab-btn" data-tab="data">Card Data</button>
+        <button class="tab-btn" data-tab="deck">Deck Builder</button>
         <button class="tab-btn" data-tab="history">History</button>
       </nav>
     </header>
@@ -343,6 +345,243 @@
       </div>
     </section>
 
+    <!-- Tab: Card Data -->
+    <section id="data-tab" class="tab-content">
+      <div class="data-container">
+        <div class="card">
+          <h2>📦 Bulk Card Data Management</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            Download and manage Scryfall's complete MTG card database locally for offline access and advanced features.
+          </p>
+          
+          <div class="form-group">
+            <label for="dataset-type">Dataset Type</label>
+            <select id="dataset-type">
+              <option value="oracle_cards">Oracle Cards (Recommended - unique cards only)</option>
+              <option value="default_cards">Default Cards (one per printing)</option>
+              <option value="all_cards">All Cards (includes all variations)</option>
+            </select>
+          </div>
+          
+          <div class="button-group">
+            <button type="button" id="sync-data-btn" class="btn btn-primary">
+              📥 Sync Data
+            </button>
+            <button type="button" id="refresh-data-btn" class="btn btn-secondary">
+              🔄 Force Refresh
+            </button>
+            <button type="button" id="clear-data-btn" class="btn btn-outline">
+              🗑️ Clear Data
+            </button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>📊 Data Status</h2>
+          <div id="data-status" class="data-status">
+            <div class="status-item">
+              <span class="status-label">Status:</span>
+              <span class="status-value" id="data-status-value">Not loaded</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Dataset:</span>
+              <span class="status-value" id="data-dataset-value">-</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Card Count:</span>
+              <span class="status-value" id="data-count-value">0</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Last Updated:</span>
+              <span class="status-value" id="data-updated-value">-</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Last Synced:</span>
+              <span class="status-value" id="data-synced-value">-</span>
+            </div>
+          </div>
+          
+          <div id="data-progress" class="progress-container" style="display: none;">
+            <div class="progress-bar">
+              <div class="progress-fill" id="data-progress-fill"></div>
+            </div>
+            <p class="progress-text" id="data-progress-text">Loading...</p>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>🔍 Index Status</h2>
+          <div id="index-status" class="data-status">
+            <div class="status-item">
+              <span class="status-label">Index Built:</span>
+              <span class="status-value" id="index-built-value">No</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Indexed Cards:</span>
+              <span class="status-value" id="index-count-value">0</span>
+            </div>
+            <div class="status-item">
+              <span class="status-label">Build Time:</span>
+              <span class="status-value" id="index-time-value">-</span>
+            </div>
+          </div>
+          
+          <div class="button-group" style="margin-top: 1rem;">
+            <button type="button" id="build-index-btn" class="btn btn-primary">
+              🏗️ Build Index
+            </button>
+            <button type="button" id="rebuild-index-btn" class="btn btn-secondary">
+              🔄 Rebuild Index
+            </button>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h2>🔎 Search Local Data</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            Search your locally stored card data using the index.
+          </p>
+          
+          <div class="form-group">
+            <label for="local-search-text">Text Search</label>
+            <input type="text" id="local-search-text" placeholder="e.g., flying, draw a card">
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="local-search-type">Type</label>
+              <select id="local-search-type">
+                <option value="">Any type</option>
+                <option value="creature">Creature</option>
+                <option value="instant">Instant</option>
+                <option value="sorcery">Sorcery</option>
+                <option value="enchantment">Enchantment</option>
+                <option value="artifact">Artifact</option>
+                <option value="planeswalker">Planeswalker</option>
+                <option value="land">Land</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="local-search-format">Format</label>
+              <select id="local-search-format">
+                <option value="">Any format</option>
+                <option value="standard">Standard</option>
+                <option value="modern">Modern</option>
+                <option value="legacy">Legacy</option>
+                <option value="vintage">Vintage</option>
+                <option value="commander">Commander</option>
+                <option value="pioneer">Pioneer</option>
+                <option value="pauper">Pauper</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="local-search-colors">Colors</label>
+              <input type="text" id="local-search-colors" placeholder="e.g., ub, wubrg">
+            </div>
+            <div class="form-group">
+              <label for="local-search-mana">Max Mana Value</label>
+              <input type="number" id="local-search-mana" min="0" placeholder="e.g., 3">
+            </div>
+          </div>
+          
+          <div class="button-group">
+            <button type="button" id="local-search-btn" class="btn btn-primary">
+              🔍 Search
+            </button>
+            <button type="button" id="local-search-clear-btn" class="btn btn-outline">
+              ↩️ Clear
+            </button>
+          </div>
+        </div>
+        
+        <div class="card" id="local-search-results-card" style="display: none;">
+          <h2>Search Results</h2>
+          <p class="results-count" id="local-results-count"></p>
+          <div id="local-search-results" class="search-results">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab: Deck Builder -->
+    <section id="deck-tab" class="tab-content">
+      <div class="deck-container">
+        <div class="card">
+          <h2>🃏 Deck Configuration Generator</h2>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+            Generate deck configurations based on constraints. Requires card data to be loaded and indexed.
+          </p>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="deck-format">Format</label>
+              <select id="deck-format">
+                <option value="standard">Standard (60 cards)</option>
+                <option value="modern">Modern (60 cards)</option>
+                <option value="pioneer">Pioneer (60 cards)</option>
+                <option value="legacy">Legacy (60 cards)</option>
+                <option value="commander">Commander (100 cards)</option>
+                <option value="brawl">Brawl (60 cards)</option>
+                <option value="pauper">Pauper (60 cards)</option>
+                <option value="limited">Limited (40 cards)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="deck-count">Number of Decks</label>
+              <input type="number" id="deck-count" min="1" max="10" value="3">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="deck-colors">Color Identity (optional)</label>
+              <input type="text" id="deck-colors" placeholder="e.g., ub, wubrg">
+            </div>
+            <div class="form-group">
+              <label for="deck-max-cmc">Max Mana Value</label>
+              <input type="number" id="deck-max-cmc" min="0" max="20" placeholder="No limit">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="deck-min-lands">Min Lands</label>
+              <input type="number" id="deck-min-lands" min="0" max="50" placeholder="Auto">
+            </div>
+            <div class="form-group">
+              <label for="deck-max-lands">Max Lands</label>
+              <input type="number" id="deck-max-lands" min="0" max="50" placeholder="Auto">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="deck-must-include">Must Include Cards (comma-separated)</label>
+            <input type="text" id="deck-must-include" placeholder="e.g., Lightning Bolt, Counterspell">
+          </div>
+          
+          <div class="button-group">
+            <button type="button" id="generate-deck-btn" class="btn btn-primary">
+              🎲 Generate Decks
+            </button>
+            <button type="button" id="clear-decks-btn" class="btn btn-outline">
+              ↩️ Clear Results
+            </button>
+          </div>
+        </div>
+        
+        <div class="card" id="deck-results-card" style="display: none;">
+          <h2>Generated Decks</h2>
+          <div id="deck-results" class="deck-results">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Tab: History -->
     <section id="history-tab" class="tab-content">
       <div class="history-container">
@@ -386,6 +625,11 @@
   <!-- Notification -->
   <div id="notification" class="notification"></div>
 
+  <!-- Load additional modules -->
+  <script src="bulk-data.js"></script>
+  <script src="card-normalizer.js"></script>
+  <script src="card-search-index.js"></script>
+  <script src="deck-generator.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
