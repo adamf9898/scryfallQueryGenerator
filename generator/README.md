@@ -1,13 +1,10 @@
 # Scryfall Query Generator - Web App
 
-A web-based interface for building [Scryfall](https://scryfall.com) search queries for Magic: The Gathering cards.
-
-## Overview
-
-This web application provides a user-friendly form interface to construct complex Scryfall search queries without needing to memorize the search syntax. Simply fill in the fields you want to search by, and the app will generate the query for you.
+A modern, feature-rich web application for building [Scryfall](https://scryfall.com) search queries for Magic: The Gathering cards.
 
 ## Features
 
+### 🔧 Query Builder
 - **Visual Query Builder**: Build queries using intuitive form controls
 - **Real-time Preview**: See your query update as you make changes
 - **Color Selection**: Easy-to-use color picker with MTG color symbols
@@ -16,7 +13,24 @@ This web application provides a user-friendly form interface to construct comple
 - **One-Click Search**: Open your search directly on Scryfall
 - **Copy to Clipboard**: Easily copy the query or URL
 
-## Usage
+### 🎲 Random Query Generator
+- **500+ Curated Queries**: Pre-built queries across 20 categories
+- **Category Filtering**: Generate queries from specific categories
+- **Batch Generation**: Generate multiple queries at once
+- **Quick Actions**: Search, copy, or save queries instantly
+
+### 📜 Query History
+- **Persistent Storage**: Queries saved in browser localStorage
+- **Quick Access**: Re-use your favorite queries
+- **Export Support**: Download history as JSON
+- **Easy Management**: Delete individual queries or clear all
+
+### 📱 Progressive Web App
+- **Installable**: Add to home screen on mobile devices
+- **Offline Support**: Works without internet connection
+- **Fast Loading**: Service worker caching for instant loads
+
+## Quick Start
 
 ### Running Locally
 
@@ -30,7 +44,12 @@ open generator/index.html
 cd generator
 python3 -m http.server 8000
 # Then open http://localhost:8000 in your browser
+
+# Option 3: Use Node.js
+npx http-server generator -p 8000
 ```
+
+## Usage Guide
 
 ### Building a Query
 
@@ -44,9 +63,24 @@ python3 -m http.server 8000
 8. **Card Properties**: Filter by special properties using "is:" filters
 9. **Raw Query**: Add any custom Scryfall syntax not covered by the form
 
-### Example Searches
+### Using Random Queries
 
-#### Find cheap Commander creatures
+1. Switch to the **Random Queries** tab
+2. Select a category or leave as "All Categories"
+3. Click **Generate Random Query** for a single query
+4. Click **Generate 5 Queries** for multiple options
+5. Use the action buttons to search, copy, or save
+
+### Managing History
+
+1. Switch to the **History** tab
+2. Click on any saved query to search or copy
+3. Use **Export History** to download as JSON
+4. Use **Clear History** to remove all saved queries
+
+## Example Searches
+
+### Find cheap Commander creatures
 - Type: Creature
 - Color Identity: Select all colors, Operator: <=
 - Format: Commander
@@ -55,7 +89,7 @@ python3 -m http.server 8000
 
 **Generated Query**: `t:creature id<=wubrg f:commander mv<=4 r>=rare`
 
-#### Find instants that draw cards
+### Find instants that draw cards
 - Type: Instant
 - Oracle Text: "draw a card"
 - Mana Value: 2, Operator: <=
@@ -71,11 +105,17 @@ python3 -m http.server 8000
 | `styles.css` | CSS styles for the web app |
 | `app.js` | JavaScript code including the ScryfallQueryBuilder class |
 | `config.json` | Configuration file with card types, colors, formats, etc. |
-| `README.md` | This documentation file |
+| `queries.json` | Database of 500+ pre-built queries across 20 categories |
+| `manifest.json` | PWA manifest for app installation |
+| `sw.js` | Service worker for offline functionality |
+| `docs/API.md` | API documentation |
+| `docs/DEPLOYMENT.md` | Deployment guide |
 
 ## Configuration
 
-The `config.json` file contains all the options displayed in the form:
+### config.json
+
+Contains all the options displayed in the form:
 
 - **colors**: MTG color codes and names
 - **types**: Card types (Creature, Instant, etc.)
@@ -87,6 +127,31 @@ The `config.json` file contains all the options displayed in the form:
 - **borders**: Border color options
 - **frames**: Frame style options
 
+### queries.json
+
+Contains pre-built queries organized by category:
+
+- **creatures**: Creature-focused queries
+- **spells**: Instant and sorcery queries
+- **artifacts**: Artifact queries
+- **enchantments**: Enchantment queries
+- **lands**: Land queries
+- **planeswalkers**: Planeswalker queries
+- **commander**: Commander format queries
+- **formats**: Format-specific queries
+- **removal**: Removal spell queries
+- **card_advantage**: Card draw queries
+- **mana**: Mana production queries
+- **tribal**: Tribal deck queries
+- **budget**: Price-filtered queries
+- **competitive**: Competitive format queries
+- **tokens**: Token generation queries
+- **counters**: Counter-related queries
+- **graveyard**: Graveyard strategy queries
+- **life_gain**: Life gain queries
+- **protection**: Protection ability queries
+- **interaction**: Interactive spell queries
+
 ## Browser Compatibility
 
 This web app works in all modern browsers:
@@ -94,6 +159,11 @@ This web app works in all modern browsers:
 - Firefox
 - Safari
 - Edge
+
+## Documentation
+
+- [API Documentation](docs/API.md) - Detailed API reference
+- [Deployment Guide](docs/DEPLOYMENT.md) - Hosting and deployment options
 
 ## Related
 
