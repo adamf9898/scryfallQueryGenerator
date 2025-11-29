@@ -3,12 +3,16 @@
  * Provides offline functionality and caching
  */
 
-const CACHE_NAME = 'scryfall-query-generator-v1';
+const CACHE_NAME = 'scryfall-query-generator-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './styles.css',
   './app.js',
+  './bulk-data.js',
+  './card-normalizer.js',
+  './card-search-index.js',
+  './deck-generator.js',
   './config.json',
   './queries.json',
   './manifest.json'

@@ -1340,5 +1340,520 @@ function showNotification(message, isError = false) {
   }, 3000);
 }
 
+// ===== Bulk Data Management =====
+
+let bulkDataManager = null;
+let cardNormalizer = null;
+let searchIndex = null;
+let deckGenerator = null;
+
+/**
+ * Initialize data management modules
+ */
+function initDataManagement() {
+  // Check if modules are loaded
+  if (typeof BulkDataManager !== 'undefined') {
+    bulkDataManager = new BulkDataManager({
+      onProgress: handleDataProgress
+    });
+    updateDataStatus();
+  }
+  
+  if (typeof CardNormalizer !== 'undefined') {
+    cardNormalizer = new CardNormalizer();
+  }
+  
+  if (typeof CardSearchIndex !== 'undefined') {
+    searchIndex = new CardSearchIndex({
+      onProgress: handleIndexProgress
+    });
+    updateIndexStatus();
+  }
+  
+  if (typeof DeckGenerator !== 'undefined' && searchIndex) {
+    deckGenerator = new DeckGenerator(searchIndex, {
+      onProgress: handleDeckProgress
+    });
+  }
+  
+  // Setup data management event listeners
+  setupDataEventListeners();
+}
+
+/**
+ * Setup event listeners for data management
+ */
+function setupDataEventListeners() {
+  // Data sync buttons
+  document.getElementById('sync-data-btn')?.addEventListener('click', syncData);
+  document.getElementById('refresh-data-btn')?.addEventListener('click', () => syncData(true));
+  document.getElementById('clear-data-btn')?.addEventListener('click', clearData);
+  
+  // Index buttons
+  document.getElementById('build-index-btn')?.addEventListener('click', buildIndex);
+  document.getElementById('rebuild-index-btn')?.addEventListener('click', () => buildIndex(true));
+  
+  // Local search
+  document.getElementById('local-search-btn')?.addEventListener('click', performLocalSearch);
+  document.getElementById('local-search-clear-btn')?.addEventListener('click', clearLocalSearch);
+  
+  // Deck generation
+  document.getElementById('generate-deck-btn')?.addEventListener('click', generateDecks);
+  document.getElementById('clear-decks-btn')?.addEventListener('click', clearDecks);
+}
+
+/**
+ * Handle data progress updates
+ */
+function handleDataProgress(progress) {
+  const progressContainer = document.getElementById('data-progress');
+  const progressFill = document.getElementById('data-progress-fill');
+  const progressText = document.getElementById('data-progress-text');
+  
+  if (!progressContainer) return;
+  
+  if (progress.status === 'complete' || progress.status === 'error' || progress.status === 'up_to_date') {
+    progressContainer.style.display = 'none';
+    updateDataStatus();
+    
+    if (progress.status === 'complete') {
+      showNotification(progress.message);
+    } else if (progress.status === 'error') {
+      showNotification(progress.message, true);
+    }
+  } else {
+    progressContainer.style.display = 'block';
+    progressText.textContent = progress.message;
+    
+    if (progress.progress !== undefined) {
+      progressFill.style.width = `${progress.progress * 100}%`;
+    }
+  }
+}
+
+/**
+ * Handle index progress updates
+ */
+function handleIndexProgress(progress) {
+  const progressText = document.getElementById('data-progress-text');
+  
+  if (progress.status === 'complete') {
+    showNotification(progress.message);
+    updateIndexStatus();
+  } else if (progress.status === 'building' && progressText) {
+    progressText.textContent = progress.message;
+  }
+}
+
+/**
+ * Handle deck generation progress
+ */
+function handleDeckProgress(progress) {
+  if (progress.status === 'complete') {
+    showNotification(progress.message);
+  }
+}
+
+/**
+ * Sync bulk data from Scryfall
+ */
+async function syncData(forceRefresh = false) {
+  if (!bulkDataManager) {
+    showNotification('Data manager not initialized', true);
+    return;
+  }
+  
+  const datasetType = document.getElementById('dataset-type')?.value || 'oracle_cards';
+  bulkDataManager.datasetType = datasetType;
+  
+  try {
+    const result = await bulkDataManager.syncBulkData({ forceRefresh });
+    
+    if (result.success) {
+      updateDataStatus();
+      if (result.refreshed) {
+        showNotification(`Synced ${result.metadata?.cardCount || 0} cards`);
+      } else {
+        showNotification(result.message);
+      }
+    } else {
+      showNotification(result.message, true);
+    }
+  } catch (error) {
+    showNotification(`Error: ${error.message}`, true);
+  }
+}
+
+/**
+ * Clear all stored data
+ */
+function clearData() {
+  if (confirm('Are you sure you want to clear all card data?')) {
+    if (bulkDataManager) {
+      bulkDataManager.clearData();
+    }
+    if (cardNormalizer) {
+      cardNormalizer.clear();
+    }
+    if (searchIndex) {
+      searchIndex.clear();
+    }
+    updateDataStatus();
+    updateIndexStatus();
+    showNotification('Data cleared');
+  }
+}
+
+/**
+ * Update data status display
+ */
+function updateDataStatus() {
+  if (!bulkDataManager) return;
+  
+  const status = bulkDataManager.getBulkStatus();
+  
+  document.getElementById('data-status-value').textContent = status.hasData ? 'Loaded' : 'Not loaded';
+  document.getElementById('data-status-value').className = 'status-value ' + (status.hasData ? 'success' : '');
+  
+  document.getElementById('data-dataset-value').textContent = status.metadata?.name || status.datasetType || '-';
+  document.getElementById('data-count-value').textContent = status.cardCount?.toLocaleString() || '0';
+  document.getElementById('data-updated-value').textContent = status.lastUpdated 
+    ? new Date(status.lastUpdated).toLocaleDateString() 
+    : '-';
+  document.getElementById('data-synced-value').textContent = status.syncedAt 
+    ? new Date(status.syncedAt).toLocaleString() 
+    : '-';
+}
+
+/**
+ * Build the search index
+ */
+async function buildIndex(rebuild = false) {
+  if (!bulkDataManager || !cardNormalizer || !searchIndex) {
+    showNotification('Required modules not initialized', true);
+    return;
+  }
+  
+  const data = bulkDataManager.getStoredData();
+  if (!data || data.length === 0) {
+    showNotification('No card data available. Please sync data first.', true);
+    return;
+  }
+  
+  showNotification('Building index...');
+  
+  try {
+    // Clear existing data if rebuilding
+    if (rebuild) {
+      cardNormalizer.clear();
+      searchIndex.clear();
+    }
+    
+    // Process cards in batches
+    const normalized = cardNormalizer.processCards(data);
+    
+    // Build the search index
+    searchIndex.buildIndex(normalized);
+    
+    updateIndexStatus();
+    showNotification(`Index built with ${normalized.length} cards`);
+    
+    // Initialize deck generator with updated index
+    if (typeof DeckGenerator !== 'undefined') {
+      deckGenerator = new DeckGenerator(searchIndex, {
+        onProgress: handleDeckProgress
+      });
+    }
+  } catch (error) {
+    showNotification(`Error building index: ${error.message}`, true);
+  }
+}
+
+/**
+ * Update index status display
+ */
+function updateIndexStatus() {
+  if (!searchIndex) return;
+  
+  const stats = searchIndex.getStats();
+  
+  document.getElementById('index-built-value').textContent = stats.cardCount > 0 ? 'Yes' : 'No';
+  document.getElementById('index-built-value').className = 'status-value ' + (stats.cardCount > 0 ? 'success' : '');
+  
+  document.getElementById('index-count-value').textContent = stats.cardCount?.toLocaleString() || '0';
+  document.getElementById('index-time-value').textContent = stats.buildTime 
+    ? `${stats.buildTime}ms` 
+    : '-';
+}
+
+/**
+ * Perform local search
+ */
+function performLocalSearch() {
+  if (!searchIndex || searchIndex.getStats().cardCount === 0) {
+    showNotification('Search index not available. Please build the index first.', true);
+    return;
+  }
+  
+  const query = {
+    text: document.getElementById('local-search-text')?.value || undefined,
+    type: document.getElementById('local-search-type')?.value || undefined,
+    format: document.getElementById('local-search-format')?.value || undefined,
+    colorIdentity: document.getElementById('local-search-colors')?.value || undefined,
+    colorIdentityOperator: '<=',
+    manaValue: document.getElementById('local-search-mana')?.value || undefined,
+    manaValueOperator: '<=',
+    limit: 50
+  };
+  
+  // Remove undefined values
+  Object.keys(query).forEach(key => {
+    if (query[key] === undefined || query[key] === '') {
+      delete query[key];
+    }
+  });
+  
+  const results = searchIndex.search(query);
+  displaySearchResults(results);
+}
+
+/**
+ * Display search results
+ */
+function displaySearchResults(results) {
+  const container = document.getElementById('local-search-results');
+  const card = document.getElementById('local-search-results-card');
+  const countEl = document.getElementById('local-results-count');
+  
+  if (!container || !card) return;
+  
+  card.style.display = 'block';
+  countEl.textContent = `Found ${results.length} cards`;
+  
+  if (results.length === 0) {
+    container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No cards found matching your criteria.</p>';
+    return;
+  }
+  
+  container.innerHTML = results.map(card => {
+    const imageUrl = card.image_uris?.small || card.card_faces?.[0]?.image_uris?.small || '';
+    const colors = (card.color_identity || []).map(c => 
+      `<span class="search-result-tag color-${c.toLowerCase()}">${c}</span>`
+    ).join('');
+    
+    return `
+      <div class="search-result-item">
+        ${imageUrl ? `<img src="${imageUrl}" alt="${card.name}" class="search-result-image" loading="lazy">` : '<div class="search-result-image"></div>'}
+        <div class="search-result-info">
+          <div class="search-result-name">${escapeHtml(card.name)}</div>
+          <div class="search-result-type">${escapeHtml(card.type_line || '')}</div>
+          <div class="search-result-meta">
+            ${card.cmc !== undefined ? `<span class="search-result-tag">CMC: ${card.cmc}</span>` : ''}
+            ${colors}
+            ${card.rarity ? `<span class="search-result-tag">${card.rarity}</span>` : ''}
+            ${card.set ? `<span class="search-result-tag">${card.set.toUpperCase()}</span>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/**
+ * Clear local search
+ */
+function clearLocalSearch() {
+  document.getElementById('local-search-text').value = '';
+  document.getElementById('local-search-type').value = '';
+  document.getElementById('local-search-format').value = '';
+  document.getElementById('local-search-colors').value = '';
+  document.getElementById('local-search-mana').value = '';
+  document.getElementById('local-search-results-card').style.display = 'none';
+}
+
+/**
+ * Generate decks
+ */
+function generateDecks() {
+  if (!deckGenerator || !searchIndex || searchIndex.getStats().cardCount === 0) {
+    showNotification('Deck generator not available. Please build the index first.', true);
+    return;
+  }
+  
+  const format = document.getElementById('deck-format')?.value || 'standard';
+  const count = parseInt(document.getElementById('deck-count')?.value) || 3;
+  const colors = document.getElementById('deck-colors')?.value || '';
+  const maxCmc = document.getElementById('deck-max-cmc')?.value;
+  const minLands = document.getElementById('deck-min-lands')?.value;
+  const maxLands = document.getElementById('deck-max-lands')?.value;
+  const mustInclude = document.getElementById('deck-must-include')?.value
+    ?.split(',')
+    ?.map(s => s.trim())
+    ?.filter(Boolean) || [];
+  
+  // Build query for card pool
+  const query = {
+    format: format
+  };
+  
+  if (colors) {
+    query.colorIdentity = colors;
+    query.colorIdentityOperator = '<=';
+  }
+  
+  // Build constraints
+  const constraints = {
+    format: format,
+    colorIdentity: colors || undefined,
+    maxManaValue: maxCmc ? parseInt(maxCmc) : undefined,
+    minLands: minLands ? parseInt(minLands) : undefined,
+    maxLands: maxLands ? parseInt(maxLands) : undefined,
+    mustInclude: mustInclude
+  };
+  
+  try {
+    const result = deckGenerator.generateMultiple(query, constraints, count);
+    
+    if (result.error) {
+      showNotification(result.error, true);
+      return;
+    }
+    
+    displayDeckResults(result.decks);
+    showNotification(`Generated ${result.decks.length} decks from ${result.candidateCount} candidates`);
+  } catch (error) {
+    showNotification(`Error generating decks: ${error.message}`, true);
+  }
+}
+
+/**
+ * Display deck results
+ */
+function displayDeckResults(decks) {
+  const container = document.getElementById('deck-results');
+  const card = document.getElementById('deck-results-card');
+  
+  if (!container || !card) return;
+  
+  card.style.display = 'block';
+  
+  if (decks.length === 0) {
+    container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">No decks generated.</p>';
+    return;
+  }
+  
+  container.innerHTML = decks.map((deck, index) => {
+    const stats = deck.stats;
+    const categories = {};
+    
+    // Group cards by category
+    for (const entry of deck.deck) {
+      const cat = deckGenerator.categorizeCard(entry.card);
+      if (!categories[cat]) categories[cat] = [];
+      categories[cat].push(entry);
+    }
+    
+    const categoryHtml = Object.entries(categories).map(([cat, cards]) => `
+      <div class="deck-category">
+        <div class="deck-category-title">${cat}s (${cards.reduce((s, e) => s + e.count, 0)})</div>
+        <div class="deck-cards">
+          ${cards.map(e => `
+            <span class="deck-card">
+              <span class="deck-card-count">${e.count}x</span>${escapeHtml(e.card.name)}
+            </span>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+    
+    // Create mana curve
+    const curveMax = Math.max(...Object.values(stats.manaCurve), 1);
+    const curveHtml = Object.entries(stats.manaCurve).map(([slot, count]) => `
+      <div class="mana-curve-bar">
+        <div class="mana-curve-fill" style="height: ${(count / curveMax) * 60}px"></div>
+        <div class="mana-curve-count">${count}</div>
+        <div class="mana-curve-label">${slot}</div>
+      </div>
+    `).join('');
+    
+    return `
+      <div class="deck-item">
+        <div class="deck-header">
+          <span class="deck-title">Deck ${index + 1}</span>
+          <div class="deck-stats">
+            <span class="deck-stat">Cards: <strong>${stats.totalCards}</strong></span>
+            <span class="deck-stat">Unique: <strong>${stats.uniqueCards}</strong></span>
+            <span class="deck-stat">Avg CMC: <strong>${stats.avgManaValue}</strong></span>
+            <span class="deck-stat">Colors: <strong>${stats.colors.join('').toUpperCase() || 'C'}</strong></span>
+          </div>
+        </div>
+        <div class="deck-body">
+          <div class="mana-curve">${curveHtml}</div>
+          ${categoryHtml}
+        </div>
+        <div class="deck-actions">
+          <button class="deck-action-btn" onclick="copyDeckToClipboard(${index})">📋 Copy List</button>
+          <button class="deck-action-btn secondary" onclick="exportDeck(${index}, 'text')">💾 Export</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Store decks for export
+  window.generatedDecks = decks;
+}
+
+/**
+ * Copy deck to clipboard
+ */
+async function copyDeckToClipboard(index) {
+  if (!window.generatedDecks || !window.generatedDecks[index]) return;
+  
+  const deck = window.generatedDecks[index];
+  const text = deckGenerator.exportDeck(deck, 'text');
+  
+  try {
+    await navigator.clipboard.writeText(text);
+    showNotification('Deck list copied to clipboard!');
+  } catch (err) {
+    showNotification('Failed to copy', true);
+  }
+}
+
+/**
+ * Export deck
+ */
+function exportDeck(index, format) {
+  if (!window.generatedDecks || !window.generatedDecks[index]) return;
+  
+  const deck = window.generatedDecks[index];
+  const text = deckGenerator.exportDeck(deck, format);
+  
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `deck-${index + 1}.${format === 'json' ? 'json' : 'txt'}`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  
+  showNotification('Deck exported!');
+}
+
+/**
+ * Clear deck results
+ */
+function clearDecks() {
+  document.getElementById('deck-results-card').style.display = 'none';
+  window.generatedDecks = [];
+}
+
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+  // Initialize data management after a short delay to ensure modules are loaded
+  setTimeout(initDataManagement, 100);
+});
