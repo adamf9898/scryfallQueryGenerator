@@ -200,9 +200,11 @@ function generateBatchQueries(count, category = 'all') {
   for (let i = 0; i < count; i++) {
     const query = generator.generate();
     if (query) {
+      // The generator uses '+' as space separator, which is URL-safe
+      // We encode directly for the Scryfall URL
       results.push({
         query,
-        url: `https://scryfall.com/search?q=${encodeURIComponent(query.replace(/\+/g, ' '))}`
+        url: `https://scryfall.com/search?q=${encodeURIComponent(query)}`
       });
     }
   }
@@ -345,7 +347,8 @@ async function searchScryfall(query) {
         manaCost: card.mana_cost,
         type: card.type_line,
         oracleText: card.oracle_text,
-        image: card.image_uris?.normal
+        // Handle both single-faced and multi-faced cards
+        image: card.image_uris?.normal || card.card_faces?.[0]?.image_uris?.normal || null
       }))
     };
   } catch (error) {

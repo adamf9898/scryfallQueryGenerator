@@ -130,10 +130,16 @@ local function generateRandomQuery(category)
 end
 
 local function buildScryfallUrl(query)
-  -- Simple URL encoding (TTS doesn't have full URL encoding)
-  local encoded = query:gsub(" ", "%%20")
+  -- URL encoding for Scryfall queries (TTS doesn't have full URL encoding)
+  -- Encode special characters that could cause URL parsing issues
+  local encoded = query:gsub("%%", "%%25")  -- Must be first to avoid double-encoding
+                       :gsub(" ", "%%20")
                        :gsub("\"", "%%22")
+                       :gsub("#", "%%23")
+                       :gsub("&", "%%26")
+                       :gsub("+", "%%2B")
                        :gsub("<", "%%3C")
+                       :gsub("=", "%%3D")
                        :gsub(">", "%%3E")
   return "https://scryfall.com/search?q=" .. encoded
 end
