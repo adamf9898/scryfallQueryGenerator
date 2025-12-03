@@ -1,0 +1,71 @@
+{
+  "rarities": [
+    {
+      "code": "common",
+      "name": "Common",
+      "symbol": "C",
+      "color": "#000000",
+      "description": "Most frequently appearing cards in booster packs"
+    },
+    {
+      "code": "uncommon",
+      "name": "Uncommon",
+      "symbol": "U",
+      "color": "#707883",
+      "description": "Less common than commons, typically 3 per pack"
+    },
+    {
+      "code": "rare",
+      "name": "Rare",
+      "symbol": "R",
+      "color": "#b8860b",
+      "description": "One per pack in most sets"
+    },
+    {
+      "code": "mythic",
+      "name": "Mythic Rare",
+      "symbol": "M",
+      "color": "#d65d0e",
+      "description": "Rarest standard rarity, appears instead of rare approximately 1 in 8 packs"
+    },
+    {
+      "code": "special",
+      "name": "Special",
+      "symbol": "S",
+      "color": "#9370db",
+      "description": "Special promotional or bonus cards"
+    },
+    {
+      "code": "bonus",
+      "name": "Bonus",
+      "symbol": "B",
+      "color": "#800080",
+      "description": "Extra cards in booster packs (e.g., The List, Mystical Archive)"
+    }
+  ],
+  "hierarchy": ["common", "uncommon", "rare", "mythic"],
+  "packDistribution": {
+    "standard": {
+      "common": 10,
+      "uncommon": 3,
+      "rareOrMythic": 1,
+      "foil": "chance",
+      "basicLand": 1
+    },
+    "set": {
+      "common": 7,
+      "uncommon": 3,
+      "rareOrMythic": 1,
+      "wildcard": 1
+    },
+    "collector": {
+      "foil": true,
+      "extendedArt": true,
+      "showcase": true
+    }
+  },
+  "mythicRatio": {
+    "description": "Mythic rares replace rares at approximately 1:8 ratio",
+    "ratio": "1:8"
+  }
+}
