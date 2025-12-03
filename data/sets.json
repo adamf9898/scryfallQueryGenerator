@@ -1,0 +1,194 @@
+{
+  "recentSets": [
+    {
+      "code": "fdn",
+      "name": "Foundations",
+      "releaseDate": "2024-11-15",
+      "type": "core"
+    },
+    {
+      "code": "dsk",
+      "name": "Duskmourn: House of Horror",
+      "releaseDate": "2024-09-27",
+      "type": "expansion"
+    },
+    {
+      "code": "blb",
+      "name": "Bloomburrow",
+      "releaseDate": "2024-08-02",
+      "type": "expansion"
+    },
+    {
+      "code": "mh3",
+      "name": "Modern Horizons 3",
+      "releaseDate": "2024-06-14",
+      "type": "masters"
+    },
+    {
+      "code": "otj",
+      "name": "Outlaws of Thunder Junction",
+      "releaseDate": "2024-04-19",
+      "type": "expansion"
+    },
+    {
+      "code": "mkm",
+      "name": "Murders at Karlov Manor",
+      "releaseDate": "2024-02-09",
+      "type": "expansion"
+    },
+    {
+      "code": "lci",
+      "name": "The Lost Caverns of Ixalan",
+      "releaseDate": "2023-11-17",
+      "type": "expansion"
+    },
+    {
+      "code": "woe",
+      "name": "Wilds of Eldraine",
+      "releaseDate": "2023-09-08",
+      "type": "expansion"
+    },
+    {
+      "code": "ltr",
+      "name": "The Lord of the Rings: Tales of Middle-earth",
+      "releaseDate": "2023-06-23",
+      "type": "expansion"
+    },
+    {
+      "code": "mom",
+      "name": "March of the Machine",
+      "releaseDate": "2023-04-21",
+      "type": "expansion"
+    },
+    {
+      "code": "one",
+      "name": "Phyrexia: All Will Be One",
+      "releaseDate": "2023-02-10",
+      "type": "expansion"
+    },
+    {
+      "code": "bro",
+      "name": "The Brothers' War",
+      "releaseDate": "2022-11-18",
+      "type": "expansion"
+    },
+    {
+      "code": "dmu",
+      "name": "Dominaria United",
+      "releaseDate": "2022-09-09",
+      "type": "expansion"
+    },
+    {
+      "code": "snc",
+      "name": "Streets of New Capenna",
+      "releaseDate": "2022-04-29",
+      "type": "expansion"
+    },
+    {
+      "code": "neo",
+      "name": "Kamigawa: Neon Dynasty",
+      "releaseDate": "2022-02-18",
+      "type": "expansion"
+    },
+    {
+      "code": "vow",
+      "name": "Innistrad: Crimson Vow",
+      "releaseDate": "2021-11-19",
+      "type": "expansion"
+    },
+    {
+      "code": "mid",
+      "name": "Innistrad: Midnight Hunt",
+      "releaseDate": "2021-09-24",
+      "type": "expansion"
+    },
+    {
+      "code": "afr",
+      "name": "Adventures in the Forgotten Realms",
+      "releaseDate": "2021-07-23",
+      "type": "expansion"
+    },
+    {
+      "code": "mh2",
+      "name": "Modern Horizons 2",
+      "releaseDate": "2021-06-18",
+      "type": "masters"
+    },
+    {
+      "code": "stx",
+      "name": "Strixhaven: School of Mages",
+      "releaseDate": "2021-04-23",
+      "type": "expansion"
+    }
+  ],
+  "popularSets": [
+    { "code": "lea", "name": "Alpha" },
+    { "code": "leb", "name": "Beta" },
+    { "code": "2ed", "name": "Unlimited" },
+    { "code": "arn", "name": "Arabian Nights" },
+    { "code": "atq", "name": "Antiquities" },
+    { "code": "leg", "name": "Legends" },
+    { "code": "ice", "name": "Ice Age" },
+    { "code": "mir", "name": "Mirage" },
+    { "code": "tmp", "name": "Tempest" },
+    { "code": "usg", "name": "Urza's Saga" },
+    { "code": "mmq", "name": "Mercadian Masques" },
+    { "code": "inv", "name": "Invasion" },
+    { "code": "ody", "name": "Odyssey" },
+    { "code": "ons", "name": "Onslaught" },
+    { "code": "mrd", "name": "Mirrodin" },
+    { "code": "chk", "name": "Champions of Kamigawa" },
+    { "code": "rav", "name": "Ravnica: City of Guilds" },
+    { "code": "tsp", "name": "Time Spiral" },
+    { "code": "lrw", "name": "Lorwyn" },
+    { "code": "shm", "name": "Shadowmoor" },
+    { "code": "ala", "name": "Shards of Alara" },
+    { "code": "zen", "name": "Zendikar" },
+    { "code": "som", "name": "Scars of Mirrodin" },
+    { "code": "isd", "name": "Innistrad" },
+    { "code": "rtr", "name": "Return to Ravnica" },
+    { "code": "ths", "name": "Theros" },
+    { "code": "ktk", "name": "Khans of Tarkir" },
+    { "code": "bfz", "name": "Battle for Zendikar" },
+    { "code": "soi", "name": "Shadows over Innistrad" },
+    { "code": "kld", "name": "Kaladesh" },
+    { "code": "akh", "name": "Amonkhet" },
+    { "code": "xln", "name": "Ixalan" },
+    { "code": "dom", "name": "Dominaria" },
+    { "code": "grn", "name": "Guilds of Ravnica" },
+    { "code": "rna", "name": "Ravnica Allegiance" },
+    { "code": "war", "name": "War of the Spark" },
+    { "code": "eld", "name": "Throne of Eldraine" },
+    { "code": "thb", "name": "Theros Beyond Death" },
+    { "code": "iko", "name": "Ikoria: Lair of Behemoths" },
+    { "code": "znr", "name": "Zendikar Rising" },
+    { "code": "khm", "name": "Kaldheim" }
+  ],
+  "setTypes": [
+    { "type": "core", "description": "Core sets with returning mechanics" },
+    { "type": "expansion", "description": "Standard-legal expansion sets" },
+    { "type": "masters", "description": "Reprint sets like Modern Masters" },
+    { "type": "commander", "description": "Commander preconstructed decks" },
+    { "type": "draft_innovation", "description": "Draft-focused sets like Conspiracy" },
+    { "type": "funny", "description": "Silver-bordered/acorn sets like Unglued" },
+    { "type": "starter", "description": "Beginner products" },
+    { "type": "promo", "description": "Promotional cards" },
+    { "type": "token", "description": "Token cards" },
+    { "type": "memorabilia", "description": "Special commemorative items" }
+  ],
+  "commanderProducts": [
+    { "code": "c24", "name": "Commander 2024" },
+    { "code": "c23", "name": "Commander 2023" },
+    { "code": "c22", "name": "Commander 2022" },
+    { "code": "c21", "name": "Commander 2021" },
+    { "code": "c20", "name": "Commander 2020" },
+    { "code": "c19", "name": "Commander 2019" },
+    { "code": "c18", "name": "Commander 2018" },
+    { "code": "c17", "name": "Commander 2017" },
+    { "code": "c16", "name": "Commander 2016" },
+    { "code": "c15", "name": "Commander 2015" },
+    { "code": "c14", "name": "Commander 2014" },
+    { "code": "c13", "name": "Commander 2013" },
+    { "code": "cmd", "name": "Commander" }
+  ]
+}

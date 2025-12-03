@@ -1,0 +1,280 @@
+{
+  "categories": {
+    "creatures": {
+      "name": "Creature Queries",
+      "description": "Common creature-based searches"
+    },
+    "spells": {
+      "name": "Spell Queries", 
+      "description": "Instant and sorcery searches"
+    },
+    "lands": {
+      "name": "Land Queries",
+      "description": "Land-based searches including mana bases"
+    },
+    "artifacts": {
+      "name": "Artifact Queries",
+      "description": "Artifact and equipment searches"
+    },
+    "enchantments": {
+      "name": "Enchantment Queries",
+      "description": "Enchantment and aura searches"
+    },
+    "commander": {
+      "name": "Commander Queries",
+      "description": "Commander format specific searches"
+    },
+    "deckBuilding": {
+      "name": "Deck Building",
+      "description": "Queries useful for building decks"
+    },
+    "budget": {
+      "name": "Budget Options",
+      "description": "Price-conscious searches"
+    }
+  },
+  "templates": [
+    {
+      "id": "aggressive_creatures",
+      "name": "Aggressive Creatures",
+      "category": "creatures",
+      "description": "Low-cost creatures with good stats",
+      "query": "t:creature mv<=2 pow>=2",
+      "variables": {
+        "maxManaValue": 2,
+        "minPower": 2
+      }
+    },
+    {
+      "id": "evasive_threats",
+      "name": "Evasive Threats",
+      "category": "creatures",
+      "description": "Creatures with evasion abilities",
+      "query": "t:creature (keyword:flying or keyword:menace or o:\"can't be blocked\")",
+      "tags": ["evasion", "aggro"]
+    },
+    {
+      "id": "tribal_creatures",
+      "name": "Tribal Creatures",
+      "category": "creatures",
+      "description": "Creatures that care about their tribe",
+      "query": "t:creature o:\"other {type}\" t:{type}",
+      "variables": {
+        "type": "Human"
+      },
+      "examples": [
+        { "type": "Elf", "query": "t:creature o:\"other Elf\" t:elf" },
+        { "type": "Goblin", "query": "t:creature o:\"other Goblin\" t:goblin" },
+        { "type": "Zombie", "query": "t:creature o:\"other Zombie\" t:zombie" }
+      ]
+    },
+    {
+      "id": "etb_creatures",
+      "name": "ETB Creatures",
+      "category": "creatures",
+      "description": "Creatures with enter-the-battlefield effects",
+      "query": "t:creature o:\"when ~ enters\"",
+      "tags": ["value", "blink"]
+    },
+    {
+      "id": "death_triggers",
+      "name": "Death Trigger Creatures",
+      "category": "creatures",
+      "description": "Creatures that do something when they die",
+      "query": "t:creature o:\"when ~ dies\"",
+      "tags": ["sacrifice", "aristocrats"]
+    },
+    {
+      "id": "counterspells",
+      "name": "Counterspells",
+      "category": "spells",
+      "description": "Spells that counter other spells",
+      "query": "t:instant o:\"counter target spell\"",
+      "tags": ["control", "interaction"]
+    },
+    {
+      "id": "removal",
+      "name": "Removal Spells",
+      "category": "spells",
+      "description": "Spells that remove creatures",
+      "query": "(t:instant or t:sorcery) (o:\"destroy target creature\" or o:\"exile target creature\")",
+      "tags": ["removal", "interaction"]
+    },
+    {
+      "id": "board_wipes",
+      "name": "Board Wipes",
+      "category": "spells",
+      "description": "Mass removal spells",
+      "query": "(t:instant or t:sorcery) (o:\"destroy all creatures\" or o:\"exile all creatures\")",
+      "tags": ["removal", "control", "sweeper"]
+    },
+    {
+      "id": "card_draw",
+      "name": "Card Draw",
+      "category": "spells",
+      "description": "Spells that draw cards",
+      "query": "(t:instant or t:sorcery) o:\"draw\" o:\"card\"",
+      "tags": ["card advantage"]
+    },
+    {
+      "id": "dual_lands",
+      "name": "Dual Lands",
+      "category": "lands",
+      "description": "Lands that produce two colors",
+      "query": "t:land produces>=2 -t:basic",
+      "tags": ["mana base"]
+    },
+    {
+      "id": "fetch_lands",
+      "name": "Fetch Lands",
+      "category": "lands",
+      "description": "Lands that search for other lands",
+      "query": "t:land is:fetchland",
+      "tags": ["mana base", "competitive"]
+    },
+    {
+      "id": "shock_lands",
+      "name": "Shock Lands",
+      "category": "lands",
+      "description": "Ravnica dual lands",
+      "query": "t:land is:shockland",
+      "tags": ["mana base", "modern"]
+    },
+    {
+      "id": "mana_rocks",
+      "name": "Mana Rocks",
+      "category": "artifacts",
+      "description": "Artifacts that produce mana",
+      "query": "t:artifact o:\"add\" (o:\"{W}\" or o:\"{U}\" or o:\"{B}\" or o:\"{R}\" or o:\"{G}\" or o:\"{C}\")",
+      "tags": ["ramp", "mana"]
+    },
+    {
+      "id": "equipment",
+      "name": "Equipment",
+      "category": "artifacts",
+      "description": "Equipment cards",
+      "query": "t:equipment",
+      "tags": ["voltron", "aggro"]
+    },
+    {
+      "id": "vehicles",
+      "name": "Vehicles",
+      "category": "artifacts",
+      "description": "Vehicle artifact creatures",
+      "query": "t:vehicle",
+      "tags": ["aggro"]
+    },
+    {
+      "id": "auras",
+      "name": "Auras",
+      "category": "enchantments",
+      "description": "Aura enchantments",
+      "query": "t:aura",
+      "tags": ["voltron", "enchantress"]
+    },
+    {
+      "id": "sagas",
+      "name": "Sagas",
+      "category": "enchantments",
+      "description": "Saga enchantments",
+      "query": "t:saga",
+      "tags": ["value"]
+    },
+    {
+      "id": "enchantress_payoffs",
+      "name": "Enchantress Payoffs",
+      "category": "enchantments",
+      "description": "Cards that reward enchantment casting",
+      "query": "o:\"whenever you cast an enchantment\" or o:\"whenever an enchantment enters\"",
+      "tags": ["enchantress", "combo"]
+    },
+    {
+      "id": "legendary_commanders",
+      "name": "Legendary Commanders",
+      "category": "commander",
+      "description": "Legendary creatures for commander",
+      "query": "t:legendary t:creature f:commander",
+      "tags": ["commander"]
+    },
+    {
+      "id": "partner_commanders",
+      "name": "Partner Commanders",
+      "category": "commander",
+      "description": "Commanders with Partner ability",
+      "query": "t:legendary t:creature keyword:partner f:commander",
+      "tags": ["commander", "partner"]
+    },
+    {
+      "id": "color_identity_commanders",
+      "name": "Color Identity Commanders",
+      "category": "commander",
+      "description": "Commanders within a color identity",
+      "query": "t:legendary t:creature id<={colors} is:commander",
+      "variables": {
+        "colors": "ub"
+      },
+      "tags": ["commander"]
+    },
+    {
+      "id": "commander_staples",
+      "name": "Commander Staples",
+      "category": "commander",
+      "description": "Highly played commander cards",
+      "query": "f:commander (\"Sol Ring\" or \"Command Tower\" or \"Arcane Signet\" or \"Lightning Greaves\")",
+      "tags": ["commander", "staples"]
+    },
+    {
+      "id": "format_staples",
+      "name": "Format Staples",
+      "category": "deckBuilding",
+      "description": "Cards playable in a specific format",
+      "query": "f:{format}",
+      "variables": {
+        "format": "modern"
+      }
+    },
+    {
+      "id": "color_fixing",
+      "name": "Color Fixing",
+      "category": "deckBuilding",
+      "description": "Cards that help fix colors",
+      "query": "(t:land or t:artifact) (o:\"any color\" or produces>=3)",
+      "tags": ["mana base"]
+    },
+    {
+      "id": "ramp_spells",
+      "name": "Ramp Spells",
+      "category": "deckBuilding",
+      "description": "Spells that accelerate mana",
+      "query": "(t:creature or t:sorcery or t:instant) (o:\"search your library\" o:\"land\" o:\"onto the battlefield\")",
+      "tags": ["ramp", "mana"]
+    },
+    {
+      "id": "budget_creatures",
+      "name": "Budget Creatures",
+      "category": "budget",
+      "description": "Affordable creature options",
+      "query": "t:creature usd<1 f:{format}",
+      "variables": {
+        "format": "commander"
+      },
+      "tags": ["budget"]
+    },
+    {
+      "id": "budget_lands",
+      "name": "Budget Dual Lands",
+      "category": "budget",
+      "description": "Affordable dual lands",
+      "query": "t:land produces>=2 -t:basic usd<2",
+      "tags": ["budget", "mana base"]
+    },
+    {
+      "id": "budget_removal",
+      "name": "Budget Removal",
+      "category": "budget",
+      "description": "Affordable removal spells",
+      "query": "(t:instant or t:sorcery) (o:destroy or o:exile) usd<0.50",
+      "tags": ["budget", "removal"]
+    }
+  ]
+}

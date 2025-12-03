@@ -1,0 +1,134 @@
+{
+  "supertypes": [
+    { "name": "Basic", "description": "Applied to basic lands" },
+    { "name": "Legendary", "description": "Only one copy in play per player" },
+    { "name": "Snow", "description": "Interacts with snow permanents and mana" },
+    { "name": "World", "description": "Legacy supertype, only one in play globally" },
+    { "name": "Ongoing", "description": "Used for schemes in Archenemy" },
+    { "name": "Elite", "description": "Used for certain dungeons" },
+    { "name": "Host", "description": "Used for augment/host mechanic" }
+  ],
+  "cardTypes": [
+    {
+      "name": "Creature",
+      "description": "Permanents with power and toughness that can attack and block",
+      "characteristics": ["power", "toughness"],
+      "isPermanent": true
+    },
+    {
+      "name": "Artifact",
+      "description": "Colorless permanents representing items and constructs",
+      "characteristics": [],
+      "isPermanent": true
+    },
+    {
+      "name": "Enchantment",
+      "description": "Permanents representing magical effects",
+      "characteristics": [],
+      "isPermanent": true
+    },
+    {
+      "name": "Land",
+      "description": "Permanents that produce mana",
+      "characteristics": [],
+      "isPermanent": true
+    },
+    {
+      "name": "Planeswalker",
+      "description": "Permanents representing allied planeswalkers with loyalty abilities",
+      "characteristics": ["loyalty"],
+      "isPermanent": true
+    },
+    {
+      "name": "Instant",
+      "description": "Spells that can be cast at any time",
+      "characteristics": [],
+      "isPermanent": false
+    },
+    {
+      "name": "Sorcery",
+      "description": "Spells that can only be cast during main phases",
+      "characteristics": [],
+      "isPermanent": false
+    },
+    {
+      "name": "Battle",
+      "description": "Permanents representing conflicts with defense counters",
+      "characteristics": ["defense"],
+      "isPermanent": true
+    },
+    {
+      "name": "Kindred",
+      "description": "Cards that have creature subtypes but are not creatures",
+      "characteristics": [],
+      "isPermanent": false
+    }
+  ],
+  "creatureTypes": [
+    "Advisor", "Aetherborn", "Alien", "Ally", "Angel", "Antelope", "Ape", "Archer",
+    "Archon", "Artificer", "Assassin", "Assembly-Worker", "Atog", "Aurochs", "Avatar",
+    "Azra", "Badger", "Balloon", "Barbarian", "Bard", "Basilisk", "Bat", "Bear",
+    "Beast", "Beeble", "Beholder", "Berserker", "Bird", "Blinkmoth", "Boar", "Bringer",
+    "Brushwagg", "Camarid", "Camel", "Capybara", "Caribou", "Carrier", "Cat", "Centaur",
+    "Cephalid", "Child", "Chimera", "Citizen", "Cleric", "Clown", "Cockatrice",
+    "Construct", "Coward", "Crab", "Crocodile", "Cyclops", "Dauthi", "Demigod", "Demon",
+    "Deserter", "Detective", "Devil", "Dinosaur", "Djinn", "Doctor", "Dog", "Dragon",
+    "Drake", "Dreadnought", "Drone", "Druid", "Dryad", "Dwarf", "Efreet", "Egg",
+    "Elder", "Eldrazi", "Elemental", "Elephant", "Elf", "Elk", "Employee", "Eye",
+    "Faerie", "Ferret", "Fish", "Flagbearer", "Fox", "Fractal", "Frog", "Fungus",
+    "Gamer", "Gargoyle", "Germ", "Giant", "Gith", "Gnoll", "Gnome", "Goat", "Goblin",
+    "God", "Golem", "Gorgon", "Graveborn", "Gremlin", "Griffin", "Guest", "Hag",
+    "Halfling", "Hamster", "Harpy", "Hellion", "Hippo", "Hippogriff", "Homarid",
+    "Homunculus", "Horror", "Horse", "Human", "Hydra", "Hyena", "Illusion", "Imp",
+    "Incarnation", "Inkling", "Inquisitor", "Insect", "Jackal", "Jellyfish", "Juggernaut",
+    "Kavu", "Kirin", "Kithkin", "Knight", "Kobold", "Kor", "Kraken", "Lamia", "Lammasu",
+    "Leech", "Leviathan", "Lhurgoyf", "Licid", "Lizard", "Llama", "Manticore",
+    "Masticore", "Mercenary", "Merfolk", "Metathran", "Minion", "Minotaur", "Mite",
+    "Mole", "Monger", "Mongoose", "Monk", "Monkey", "Moonfolk", "Mouse", "Mutant",
+    "Myr", "Mystic", "Naga", "Nautilus", "Nephilim", "Nightmare", "Nightstalker",
+    "Ninja", "Noble", "Noggle", "Nomad", "Nymph", "Octopus", "Ogre", "Ooze", "Orb",
+    "Orc", "Orgg", "Otter", "Ouphe", "Ox", "Oyster", "Pangolin", "Peasant", "Pegasus",
+    "Pentavite", "Performer", "Pest", "Phelddagrif", "Phoenix", "Phyrexian", "Pilot",
+    "Pincher", "Pirate", "Plant", "Praetor", "Prism", "Processor", "Rabbit", "Raccoon",
+    "Ranger", "Rat", "Rebel", "Reflection", "Reveler", "Rhino", "Rigger", "Robot",
+    "Rogue", "Sable", "Salamander", "Samurai", "Sand", "Saproling", "Satyr", "Scarecrow",
+    "Scientist", "Scion", "Scorpion", "Scout", "Sculpture", "Serf", "Serpent", "Servo",
+    "Shade", "Shaman", "Shapeshifter", "Shark", "Sheep", "Siren", "Skeleton", "Slith",
+    "Sliver", "Slug", "Snail", "Snake", "Soldier", "Soltari", "Spawn", "Specter",
+    "Spellshaper", "Sphinx", "Spider", "Spike", "Spirit", "Splinter", "Sponge",
+    "Squid", "Squirrel", "Starfish", "Surrakar", "Survivor", "Teddy", "Tentacle",
+    "Tetravite", "Thalakos", "Thopter", "Thrull", "Tiefling", "Time Lord", "Treefolk",
+    "Trilobite", "Triskelavite", "Troll", "Turtle", "Tyranid", "Unicorn", "Vampire",
+    "Varmint", "Vedalken", "Viashino", "Volver", "Wall", "Walrus", "Warlock", "Warrior",
+    "Wasp", "Weird", "Werewolf", "Whale", "Wizard", "Wolf", "Wolverine", "Wombat",
+    "Worm", "Wraith", "Wurm", "Yeti", "Zombie", "Zubera"
+  ],
+  "artifactTypes": [
+    "Attraction", "Blood", "Bobblehead", "Clue", "Contraption", "Equipment",
+    "Food", "Fortification", "Gold", "Incubator", "Junk", "Map", "Powerstone",
+    "Treasure", "Vehicle"
+  ],
+  "enchantmentTypes": [
+    "Aura", "Background", "Cartouche", "Case", "Class", "Curse", "Role",
+    "Room", "Rune", "Saga", "Shard", "Shrine"
+  ],
+  "landTypes": {
+    "basic": ["Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes"],
+    "nonbasic": ["Cave", "Desert", "Gate", "Lair", "Locus", "Mine",
+                 "Power-Plant", "Sphere", "Tower", "Urza's"]
+  },
+  "planeswalkerTypes": [
+    "Ajani", "Aminatou", "Angrath", "Arlinn", "Ashiok", "Bahamut", "Basri",
+    "Bolas", "Calix", "Chandra", "Comet", "Dack", "Dakkon", "Daretti", "Davriel",
+    "Dihada", "Domri", "Dovin", "Ellywick", "Elminster", "Elspeth", "Estrid",
+    "Freyalise", "Garruk", "Gideon", "Grist", "Guff", "Huatli", "Jace", "Jared",
+    "Jaya", "Jeska", "Karn", "Kasmina", "Kaya", "Kiora", "Koth", "Liliana",
+    "Lolth", "Lukka", "Minsc", "Mordenkainen", "Nahiri", "Narset", "Niko", "Nissa",
+    "Nixilis", "Oko", "Quintorius", "Ral", "Rowan", "Saheeli", "Samut", "Sarkhan",
+    "Serra", "Sivitri", "Sorin", "Szat", "Tamiyo", "Teferi", "Teyo", "Tezzeret",
+    "Tibalt", "Tyvar", "Ugin", "Urza", "Venser", "Vivien", "Vraska", "Will",
+    "Windgrace", "Wrenn", "Xenagos", "Yanggu", "Yanling", "Zariel"
+  ],
+  "spellTypes": ["Adventure", "Arcane", "Lesson", "Trap"],
+  "battleTypes": ["Siege"]
+}

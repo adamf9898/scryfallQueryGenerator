@@ -1,0 +1,138 @@
+{
+  "comparison": [
+    {
+      "code": "=",
+      "name": "Equals",
+      "description": "Exactly matches the value",
+      "scryfallSyntax": "field=value",
+      "example": "mv=3"
+    },
+    {
+      "code": "<",
+      "name": "Less than",
+      "description": "Value is less than the specified amount",
+      "scryfallSyntax": "field<value",
+      "example": "mv<3"
+    },
+    {
+      "code": ">",
+      "name": "Greater than",
+      "description": "Value is greater than the specified amount",
+      "scryfallSyntax": "field>value",
+      "example": "mv>3"
+    },
+    {
+      "code": "<=",
+      "name": "Less than or equal",
+      "description": "Value is less than or equal to the specified amount",
+      "scryfallSyntax": "field<=value",
+      "example": "mv<=3"
+    },
+    {
+      "code": ">=",
+      "name": "Greater than or equal",
+      "description": "Value is greater than or equal to the specified amount",
+      "scryfallSyntax": "field>=value",
+      "example": "mv>=3"
+    },
+    {
+      "code": "!=",
+      "name": "Not equal",
+      "description": "Value does not equal the specified amount",
+      "scryfallSyntax": "field!=value",
+      "example": "mv!=3"
+    },
+    {
+      "code": ":",
+      "name": "Contains",
+      "description": "Value contains the specified text",
+      "scryfallSyntax": "field:value",
+      "example": "o:draw"
+    }
+  ],
+  "boolean": [
+    {
+      "code": "or",
+      "name": "OR",
+      "description": "Either condition must be true",
+      "scryfallSyntax": "(condition1 or condition2)",
+      "example": "(t:creature or t:artifact)"
+    },
+    {
+      "code": "and",
+      "name": "AND",
+      "description": "Both conditions must be true (implicit with space)",
+      "scryfallSyntax": "condition1 condition2",
+      "example": "t:creature c=r"
+    },
+    {
+      "code": "-",
+      "name": "NOT",
+      "description": "Excludes cards matching the condition",
+      "scryfallSyntax": "-condition",
+      "example": "-t:creature"
+    }
+  ],
+  "grouping": [
+    {
+      "code": "()",
+      "name": "Parentheses",
+      "description": "Groups conditions together",
+      "scryfallSyntax": "(conditions)",
+      "example": "(t:creature or t:planeswalker) c=u"
+    }
+  ],
+  "colorOperators": {
+    "exactly": {
+      "code": "=",
+      "description": "Card has exactly these colors",
+      "example": "c=ub"
+    },
+    "atMost": {
+      "code": "<=",
+      "description": "Card has at most these colors (can have fewer)",
+      "example": "c<=wubrg"
+    },
+    "atLeast": {
+      "code": ">=",
+      "description": "Card has at least these colors (can have more)",
+      "example": "c>=u"
+    },
+    "lessThan": {
+      "code": "<",
+      "description": "Card has strictly fewer colors",
+      "example": "c<wubrg"
+    },
+    "moreThan": {
+      "code": ">",
+      "description": "Card has strictly more colors",
+      "example": "c>u"
+    }
+  },
+  "specialSyntax": [
+    {
+      "code": "\"\"",
+      "name": "Exact phrase",
+      "description": "Matches the exact phrase",
+      "example": "o:\"draw a card\""
+    },
+    {
+      "code": "*",
+      "name": "Wildcard",
+      "description": "Matches any characters",
+      "example": "name:*bolt*"
+    },
+    {
+      "code": "~",
+      "name": "Card name reference",
+      "description": "References the card's own name in oracle text",
+      "example": "o:\"~ enters the battlefield\""
+    },
+    {
+      "code": "/regex/",
+      "name": "Regular expression",
+      "description": "Matches using regex pattern",
+      "example": "o:/draw .* cards?/"
+    }
+  ]
+}

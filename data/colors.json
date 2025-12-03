@@ -1,0 +1,96 @@
+{
+  "colors": [
+    {
+      "code": "w",
+      "name": "White",
+      "symbol": "{W}",
+      "manaSymbol": "W",
+      "keywords": ["vigilance", "lifelink", "first strike", "protection", "flying"],
+      "themes": ["healing", "protection", "order", "community", "light"]
+    },
+    {
+      "code": "u",
+      "name": "Blue",
+      "symbol": "{U}",
+      "manaSymbol": "U",
+      "keywords": ["flying", "flash", "hexproof", "ward"],
+      "themes": ["knowledge", "control", "illusion", "manipulation", "water"]
+    },
+    {
+      "code": "b",
+      "name": "Black",
+      "symbol": "{B}",
+      "manaSymbol": "B",
+      "keywords": ["deathtouch", "lifelink", "menace", "fear", "intimidate"],
+      "themes": ["death", "sacrifice", "power", "corruption", "darkness"]
+    },
+    {
+      "code": "r",
+      "name": "Red",
+      "symbol": "{R}",
+      "manaSymbol": "R",
+      "keywords": ["haste", "first strike", "trample", "menace"],
+      "themes": ["fire", "chaos", "freedom", "destruction", "passion"]
+    },
+    {
+      "code": "g",
+      "name": "Green",
+      "symbol": "{G}",
+      "manaSymbol": "G",
+      "keywords": ["trample", "reach", "vigilance", "hexproof"],
+      "themes": ["nature", "growth", "instinct", "strength", "life"]
+    },
+    {
+      "code": "c",
+      "name": "Colorless",
+      "symbol": "{C}",
+      "manaSymbol": "C",
+      "keywords": [],
+      "themes": ["artifacts", "eldrazi", "void", "neutral"]
+    }
+  ],
+  "colorPairs": {
+    "allied": [
+      { "codes": "wu", "name": "Azorius", "guild": "Azorius Senate" },
+      { "codes": "ub", "name": "Dimir", "guild": "House Dimir" },
+      { "codes": "br", "name": "Rakdos", "guild": "Cult of Rakdos" },
+      { "codes": "rg", "name": "Gruul", "guild": "Gruul Clans" },
+      { "codes": "gw", "name": "Selesnya", "guild": "Selesnya Conclave" }
+    ],
+    "enemy": [
+      { "codes": "wb", "name": "Orzhov", "guild": "Orzhov Syndicate" },
+      { "codes": "ur", "name": "Izzet", "guild": "Izzet League" },
+      { "codes": "bg", "name": "Golgari", "guild": "Golgari Swarm" },
+      { "codes": "rw", "name": "Boros", "guild": "Boros Legion" },
+      { "codes": "gu", "name": "Simic", "guild": "Simic Combine" }
+    ]
+  },
+  "colorTrios": {
+    "shards": [
+      { "codes": "wub", "name": "Esper" },
+      { "codes": "ubr", "name": "Grixis" },
+      { "codes": "brg", "name": "Jund" },
+      { "codes": "rgw", "name": "Naya" },
+      { "codes": "gwu", "name": "Bant" }
+    ],
+    "wedges": [
+      { "codes": "wbg", "name": "Abzan" },
+      { "codes": "urw", "name": "Jeskai" },
+      { "codes": "bgu", "name": "Sultai" },
+      { "codes": "rwb", "name": "Mardu" },
+      { "codes": "gur", "name": "Temur" }
+    ]
+  },
+  "fourColor": [
+    { "codes": "wubr", "name": "Non-Green", "nicknames": ["Yore-Tiller", "Artifice"] },
+    { "codes": "ubrg", "name": "Non-White", "nicknames": ["Glint-Eye", "Chaos"] },
+    { "codes": "brgw", "name": "Non-Blue", "nicknames": ["Dune-Brood", "Aggression"] },
+    { "codes": "rgwu", "name": "Non-Black", "nicknames": ["Ink-Treader", "Altruism"] },
+    { "codes": "gwub", "name": "Non-Red", "nicknames": ["Witch-Maw", "Growth"] }
+  ],
+  "fiveColor": {
+    "codes": "wubrg",
+    "name": "Five-Color",
+    "nicknames": ["WUBRG", "Rainbow", "Domain"]
+  }
+}
