@@ -785,11 +785,6 @@ footer a:hover {
   }
 }
 
-/* Dark mode support (optional - can be enabled later) */
-@media (prefers-color-scheme: dark) {
-  /* Dark mode styles can be added here in the future */
-}
-
 /* Print styles */
 @media print {
   .btn,

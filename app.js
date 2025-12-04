@@ -1056,8 +1056,3 @@ function debounce(func, wait) {
     timeout = setTimeout(later, wait);
   };
 }
-
-// Export for testing (if in Node.js environment)
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { ScryfallQueryBuilder };
-}
