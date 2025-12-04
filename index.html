@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Build powerful Scryfall search queries for Magic: The Gathering cards with an easy-to-use interface">
+  <meta name="theme-color" content="#6366f1">
+  <title>Scryfall Query Generator</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔮</text></svg>">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🔮 Scryfall Query Generator</h1>
+      <p class="subtitle">Build powerful search queries for Magic: The Gathering cards</p>
+    </header>
+
+    <main class="main-content">
+      <!-- Left Column - Form -->
+      <div class="form-column">
+        <form id="query-form" novalidate>
+          
+          <!-- Card Name & Text Section -->
+          <section class="card">
+            <h2>📝 Card Name & Text</h2>
+            <div class="form-group">
+              <label for="card-name">
+                Card Name
+                <span class="tooltip" data-tooltip="Search for cards containing this text in their name. Use partial matches for broader results.">ℹ️</span>
+              </label>
+              <input type="text" id="card-name" placeholder="e.g., Lightning Bolt" autocomplete="off">
+              <span class="validation-message" id="card-name-error"></span>
+            </div>
+            <div class="form-group checkbox-group">
+              <label>
+                <input type="checkbox" id="exact-match">
+                <span>Exact name match only</span>
+                <span class="tooltip" data-tooltip="When checked, searches for cards with this exact name rather than partial matches.">ℹ️</span>
+              </label>
+            </div>
+            <div class="form-group">
+              <label for="oracle-text">
+                Oracle Text (Rules Text)
+                <span class="tooltip" data-tooltip="Search within the card's rules text. Great for finding cards with specific abilities.">ℹ️</span>
+              </label>
+              <input type="text" id="oracle-text" placeholder="e.g., draw a card">
+            </div>
+            <div class="form-group">
+              <label for="flavor-text">
+                Flavor Text
+                <span class="tooltip" data-tooltip="Search within the card's italic flavor text.">ℹ️</span>
+              </label>
+              <input type="text" id="flavor-text" placeholder="e.g., doom">
+            </div>
+          </section>
+
+          <!-- Type & Color Section -->
+          <section class="card">
+            <h2>🎨 Type & Color</h2>
+            <div class="form-group">
+              <label for="type">
+                Card Type
+                <span class="tooltip" data-tooltip="Filter by card type such as Creature, Instant, Sorcery, etc.">ℹ️</span>
+              </label>
+              <select id="type">
+                <option value="">Any type</option>
+                <option value="creature">Creature</option>
+                <option value="instant">Instant</option>
+                <option value="sorcery">Sorcery</option>
+                <option value="enchantment">Enchantment</option>
+                <option value="artifact">Artifact</option>
+                <option value="planeswalker">Planeswalker</option>
+                <option value="land">Land</option>
+                <option value="battle">Battle</option>
+                <option value="legendary">Legendary</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>
+                Colors
+                <span class="tooltip" data-tooltip="Select colors to filter cards. Multiple colors will search for multicolored cards.">ℹ️</span>
+              </label>
+              <div class="color-options">
+                <label class="color-checkbox" title="White - Plains mana">
+                  <input type="checkbox" value="w" class="color-input">
+                  <span class="color-indicator white">W</span>
+                  <span class="color-name">White</span>
+                </label>
+                <label class="color-checkbox" title="Blue - Island mana">
+                  <input type="checkbox" value="u" class="color-input">
+                  <span class="color-indicator blue">U</span>
+                  <span class="color-name">Blue</span>
+                </label>
+                <label class="color-checkbox" title="Black - Swamp mana">
+                  <input type="checkbox" value="b" class="color-input">
+                  <span class="color-indicator black">B</span>
+                  <span class="color-name">Black</span>
+                </label>
+                <label class="color-checkbox" title="Red - Mountain mana">
+                  <input type="checkbox" value="r" class="color-input">
+                  <span class="color-indicator red">R</span>
+                  <span class="color-name">Red</span>
+                </label>
+                <label class="color-checkbox" title="Green - Forest mana">
+                  <input type="checkbox" value="g" class="color-input">
+                  <span class="color-indicator green">G</span>
+                  <span class="color-name">Green</span>
+                </label>
+                <label class="color-checkbox" title="Colorless mana">
+                  <input type="checkbox" value="c" class="color-input">
+                  <span class="color-indicator colorless">C</span>
+                  <span class="color-name">Colorless</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="color-mode">
+                  Color Search Mode
+                  <span class="tooltip" data-tooltip="Card Color: The card's actual colors. Color Identity: All colors in mana cost and rules text (for Commander).">ℹ️</span>
+                </label>
+                <select id="color-mode">
+                  <option value="color">Card Color</option>
+                  <option value="identity">Color Identity</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="color-operator">Operator</label>
+                <select id="color-operator" class="operator-select">
+                  <option value="=">Equals (=)</option>
+                  <option value="<">Less than (&lt;)</option>
+                  <option value=">">Greater than (&gt;)</option>
+                  <option value="<=">At most (≤)</option>
+                  <option value=">=">At least (≥)</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Mana & Stats Section -->
+          <section class="card">
+            <h2>⚡ Mana & Stats</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="mana-value">
+                  Mana Value (CMC)
+                  <span class="tooltip" data-tooltip="The total mana cost of the card. Also known as Converted Mana Cost.">ℹ️</span>
+                </label>
+                <input type="number" id="mana-value" min="0" max="20" placeholder="e.g., 3">
+                <span class="validation-message" id="mana-value-error"></span>
+              </div>
+              <div class="form-group">
+                <label for="mana-value-operator">Operator</label>
+                <select id="mana-value-operator" class="operator-select">
+                  <option value="=">Equals (=)</option>
+                  <option value="<">Less than (&lt;)</option>
+                  <option value=">">Greater than (&gt;)</option>
+                  <option value="<=">At most (≤)</option>
+                  <option value=">=">At least (≥)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="power">
+                  Power
+                  <span class="tooltip" data-tooltip="The power (attack) value for creatures.">ℹ️</span>
+                </label>
+                <input type="number" id="power" min="0" max="99" placeholder="e.g., 4">
+              </div>
+              <div class="form-group">
+                <label for="power-operator">Operator</label>
+                <select id="power-operator" class="operator-select">
+                  <option value="=">Equals (=)</option>
+                  <option value="<">Less than (&lt;)</option>
+                  <option value=">">Greater than (&gt;)</option>
+                  <option value="<=">At most (≤)</option>
+                  <option value=">=">At least (≥)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="toughness">
+                  Toughness
+                  <span class="tooltip" data-tooltip="The toughness (defense) value for creatures.">ℹ️</span>
+                </label>
+                <input type="number" id="toughness" min="0" max="99" placeholder="e.g., 4">
+              </div>
+              <div class="form-group">
+                <label for="toughness-operator">Operator</label>
+                <select id="toughness-operator" class="operator-select">
+                  <option value="=">Equals (=)</option>
+                  <option value="<">Less than (&lt;)</option>
+                  <option value=">">Greater than (&gt;)</option>
+                  <option value="<=">At most (≤)</option>
+                  <option value=">=">At least (≥)</option>
+                </select>
+              </div>
+            </div>
+          </section>
+
+          <!-- Rarity & Set Section -->
+          <section class="card">
+            <h2>💎 Rarity & Set</h2>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="rarity">
+                  Rarity
+                  <span class="tooltip" data-tooltip="Filter by card rarity level.">ℹ️</span>
+                </label>
+                <select id="rarity">
+                  <option value="">Any rarity</option>
+                  <option value="common">Common</option>
+                  <option value="uncommon">Uncommon</option>
+                  <option value="rare">Rare</option>
+                  <option value="mythic">Mythic</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="rarity-operator">Operator</label>
+                <select id="rarity-operator" class="operator-select">
+                  <option value="=">Equals (=)</option>
+                  <option value="<">Less than (&lt;)</option>
+                  <option value=">">Greater than (&gt;)</option>
+                  <option value="<=">At most (≤)</option>
+                  <option value=">=">At least (≥)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="set">
+                Set Code
+                <span class="tooltip" data-tooltip="The three-letter code for a Magic set. Examples: dom (Dominaria), m21 (Core Set 2021), neo (Kamigawa: Neon Dynasty)">ℹ️</span>
+              </label>
+              <input type="text" id="set" placeholder="e.g., dom, m21, neo" maxlength="10" pattern="[a-zA-Z0-9]+">
+              <span class="validation-message" id="set-error"></span>
+            </div>
+          </section>
+
+          <!-- Format Section -->
+          <section class="card">
+            <h2>📋 Format Legality</h2>
+            <div class="form-group">
+              <label for="format">
+                Format
+                <span class="tooltip" data-tooltip="Filter by format legality. Only shows cards legal in the selected format.">ℹ️</span>
+              </label>
+              <select id="format">
+                <option value="">Any format</option>
+                <option value="standard">Standard</option>
+                <option value="modern">Modern</option>
+                <option value="legacy">Legacy</option>
+                <option value="vintage">Vintage</option>
+                <option value="commander">Commander (EDH)</option>
+                <option value="pioneer">Pioneer</option>
+                <option value="pauper">Pauper</option>
+                <option value="historic">Historic</option>
+                <option value="brawl">Brawl</option>
+                <option value="alchemy">Alchemy</option>
+              </select>
+            </div>
+          </section>
+
+          <!-- Advanced Options (Collapsible) -->
+          <section class="card">
+            <h2 class="collapsible">🔧 Advanced Options <span class="collapse-icon">▼</span></h2>
+            <div class="collapsible-content">
+              <div class="form-group">
+                <label for="artist">
+                  Artist
+                  <span class="tooltip" data-tooltip="Search for cards illustrated by a specific artist.">ℹ️</span>
+                </label>
+                <input type="text" id="artist" placeholder="e.g., John Avon">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="frame">Frame Style</label>
+                  <select id="frame">
+                    <option value="">Any frame</option>
+                    <option value="1993">1993 (Original)</option>
+                    <option value="1997">1997</option>
+                    <option value="2003">2003 (Modern)</option>
+                    <option value="2015">2015 (M15)</option>
+                    <option value="future">Future Sight</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="border">Border Color</label>
+                  <select id="border">
+                    <option value="">Any border</option>
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="silver">Silver</option>
+                    <option value="gold">Gold</option>
+                    <option value="borderless">Borderless</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="price-usd">
+                    Price (USD)
+                    <span class="tooltip" data-tooltip="Filter by current market price in US dollars.">ℹ️</span>
+                  </label>
+                  <input type="number" id="price-usd" min="0" step="0.01" placeholder="e.g., 10.00">
+                </div>
+                <div class="form-group">
+                  <label for="price-usd-operator">Operator</label>
+                  <select id="price-usd-operator" class="operator-select">
+                    <option value="=">Equals (=)</option>
+                    <option value="<">Less than (&lt;)</option>
+                    <option value=">">Greater than (&gt;)</option>
+                    <option value="<=">At most (≤)</option>
+                    <option value=">=">At least (≥)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Keywords Section (Collapsible) -->
+          <section class="card">
+            <h2 class="collapsible">🏷️ Keywords <span class="collapse-icon">▼</span></h2>
+            <div class="collapsible-content">
+              <p class="section-description">Click to select keywords to filter by:</p>
+              <div id="keywords-container" class="keyword-tags">
+                <span class="keyword-tag" data-keyword="flying">Flying</span>
+                <span class="keyword-tag" data-keyword="trample">Trample</span>
+                <span class="keyword-tag" data-keyword="haste">Haste</span>
+                <span class="keyword-tag" data-keyword="vigilance">Vigilance</span>
+                <span class="keyword-tag" data-keyword="lifelink">Lifelink</span>
+                <span class="keyword-tag" data-keyword="deathtouch">Deathtouch</span>
+                <span class="keyword-tag" data-keyword="first strike">First Strike</span>
+                <span class="keyword-tag" data-keyword="double strike">Double Strike</span>
+                <span class="keyword-tag" data-keyword="hexproof">Hexproof</span>
+                <span class="keyword-tag" data-keyword="indestructible">Indestructible</span>
+                <span class="keyword-tag" data-keyword="menace">Menace</span>
+                <span class="keyword-tag" data-keyword="reach">Reach</span>
+                <span class="keyword-tag" data-keyword="flash">Flash</span>
+                <span class="keyword-tag" data-keyword="defender">Defender</span>
+                <span class="keyword-tag" data-keyword="ward">Ward</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Card Properties Section (Collapsible) -->
+          <section class="card">
+            <h2 class="collapsible">✨ Card Properties (is:) <span class="collapse-icon">▼</span></h2>
+            <div class="collapsible-content">
+              <p class="section-description">Click to filter by special properties:</p>
+              <div id="is-filters-container" class="keyword-tags">
+                <span class="keyword-tag" data-filter="commander">Commander</span>
+                <span class="keyword-tag" data-filter="spell">Spell</span>
+                <span class="keyword-tag" data-filter="permanent">Permanent</span>
+                <span class="keyword-tag" data-filter="historic">Historic</span>
+                <span class="keyword-tag" data-filter="modal">Modal</span>
+                <span class="keyword-tag" data-filter="vanilla">Vanilla</span>
+                <span class="keyword-tag" data-filter="funny">Funny (Un-sets)</span>
+                <span class="keyword-tag" data-filter="booster">Booster</span>
+                <span class="keyword-tag" data-filter="reprint">Reprint</span>
+                <span class="keyword-tag" data-filter="promo">Promo</span>
+                <span class="keyword-tag" data-filter="digital">Digital</span>
+                <span class="keyword-tag" data-filter="foil">Foil</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Raw Query Section (Collapsible) -->
+          <section class="card">
+            <h2 class="collapsible collapsed">📝 Raw Query <span class="collapse-icon">▶</span></h2>
+            <div class="collapsible-content collapsed">
+              <div class="form-group">
+                <label for="raw-query">
+                  Custom Query Text
+                  <span class="tooltip" data-tooltip="Add any custom Scryfall syntax that isn't covered by the form above.">ℹ️</span>
+                </label>
+                <input type="text" id="raw-query" placeholder="e.g., game:paper">
+              </div>
+              <p class="section-description">
+                Add any custom Scryfall syntax. 
+                <a href="https://scryfall.com/docs/syntax" target="_blank" rel="noopener">Syntax Reference ↗</a>
+              </p>
+            </div>
+          </section>
+        </form>
+      </div>
+
+      <!-- Right Column - Output -->
+      <div class="output-column">
+        <div class="card query-output sticky">
+          <h2>🔍 Generated Query</h2>
+          <div id="query-display" class="query-display" aria-live="polite"></div>
+          
+          <h2>🔗 Scryfall URL</h2>
+          <div id="url-display" class="url-display" aria-live="polite"></div>
+          
+          <div class="button-group">
+            <button type="button" id="search-btn" class="btn btn-primary" aria-label="Search on Scryfall">
+              🔍 Search on Scryfall
+            </button>
+            <button type="button" id="copy-btn" class="btn btn-secondary" aria-label="Copy query to clipboard">
+              📋 Copy Query
+            </button>
+            <button type="button" id="copy-url-btn" class="btn btn-secondary" aria-label="Copy URL to clipboard">
+              🔗 Copy URL
+            </button>
+            <button type="button" id="reset-btn" class="btn btn-outline" aria-label="Reset all form fields">
+              ↩️ Reset Form
+            </button>
+          </div>
+          
+          <!-- Error display area -->
+          <div id="error-display" class="error-display" role="alert" aria-live="assertive"></div>
+        </div>
+        
+        <!-- Quick Examples -->
+        <div class="card examples-card">
+          <h2>💡 Quick Examples</h2>
+          <p class="section-description">Click to load example queries:</p>
+          <div class="examples-list">
+            <button type="button" class="example-btn" data-example="cheap-creatures">
+              Cheap creatures (CMC ≤ 3)
+            </button>
+            <button type="button" class="example-btn" data-example="commander-legends">
+              Commander Legends
+            </button>
+            <button type="button" class="example-btn" data-example="blue-instants">
+              Blue Instants with Draw
+            </button>
+            <button type="button" class="example-btn" data-example="budget-cards">
+              Budget Cards (< $1)
+            </button>
+            <button type="button" class="example-btn" data-example="flying-creatures">
+              Flying Creatures in Modern
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>
+        Built with the <a href="https://github.com/adamf9898/scryfallQueryGenerator" target="_blank" rel="noopener">Scryfall Query Generator</a> library.
+        <br>
+        <a href="https://scryfall.com" target="_blank" rel="noopener">Scryfall</a> is a trademark of Scryfall LLC.
+        Magic: The Gathering is a trademark of Wizards of the Coast.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="notification" class="notification" role="status" aria-live="polite"></div>
+
+  <!-- Main Application Script -->
+  <script src="app.js"></script>
+</body>
+</html>
