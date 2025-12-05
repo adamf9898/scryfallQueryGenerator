@@ -1,6 +1,69 @@
 # Scryfall Query Generator
 
-A fluent JavaScript API for building [Scryfall](https://scryfall.com) search queries for Magic: The Gathering cards.
+A fluent JavaScript API and web application for building [Scryfall](https://scryfall.com) search queries for Magic: The Gathering cards.
+
+## 🌐 Web Application
+
+The easiest way to use the Scryfall Query Generator is through the interactive web application. Simply open `index.html` in your browser to get started!
+
+### Features
+
+- **Easy-to-use Interface**: Intuitive form-based query builder with live preview
+- **Input Validation**: Real-time validation with helpful error messages
+- **Tooltips**: Hover over the ℹ️ icons for guidance on each field
+- **Live Preview**: See your query update in real-time as you type
+- **Quick Examples**: Pre-built example queries to get you started
+- **Copy to Clipboard**: One-click copy for queries and URLs
+- **Mobile Responsive**: Works on all devices and screen sizes
+- **Accessible**: Keyboard navigation and screen reader support
+
+### Query Parameters
+
+The web app supports the following search parameters:
+
+| Parameter | Description |
+|-----------|-------------|
+| **Card Name** | Search by card name (partial or exact match) |
+| **Oracle Text** | Search within rules text |
+| **Flavor Text** | Search within flavor text |
+| **Card Type** | Filter by creature, instant, sorcery, etc. |
+| **Colors** | Filter by card color or color identity |
+| **Mana Value** | Filter by converted mana cost |
+| **Power/Toughness** | Filter creature stats |
+| **Rarity** | Filter by common, uncommon, rare, mythic |
+| **Set Code** | Filter by specific set |
+| **Format** | Filter by format legality |
+| **Artist** | Filter by card artist |
+| **Keywords** | Filter by keyword abilities |
+| **Card Properties** | Filter by special properties (is:) |
+| **Price** | Filter by market price |
+
+### Running the Web App
+
+Simply open `index.html` in any modern web browser. No server or installation required!
+
+```bash
+# Using a local development server (optional)
+npx serve .
+
+# Or just open directly
+open index.html
+```
+
+### Browser Compatibility
+
+The web application is tested and compatible with:
+- Google Chrome (latest)
+- Mozilla Firefox (latest)
+- Microsoft Edge (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome for Android)
+
+---
+
+## 📦 JavaScript Library
+
+For programmatic use, the Scryfall Query Generator is also available as a JavaScript library.
 
 ## Installation
 
@@ -225,6 +288,39 @@ Many methods accept an optional operator parameter:
 - `<=`: less than or equal
 - `>=`: greater than or equal
 
-## License
+---
+
+## 📁 Project Structure
+
+```
+scryfallQueryGenerator/
+├── index.html          # Main web application
+├── styles.css          # Web application styles
+├── app.js              # Web application JavaScript
+├── src/                # JavaScript library source
+│   ├── index.js        # Library entry point
+│   ├── ScryfallQueryBuilder.js   # Query builder class
+│   └── RandomQueryGenerator.js   # Random query generator
+├── data/               # Reference data files
+│   ├── colors.json     # MTG color definitions
+│   ├── formats.json    # Format definitions
+│   ├── keywords.json   # Keyword abilities
+│   ├── types.json      # Card types
+│   └── ...
+├── __tests__/          # Test files
+├── generator/          # Advanced generator app
+└── README.md           # This file
+```
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+npm install
+npm test
+```
+
+## 📝 License
 
 MIT
