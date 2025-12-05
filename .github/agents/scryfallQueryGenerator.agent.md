@@ -8,7 +8,7 @@ name: scryfallQueryGenerator
 description: Generates scryfall queries
 ---
 
-# scryfallQueryGenerator Copilot Instructions
+# scryfallQueryGenerator Agent
 
 ---
 
