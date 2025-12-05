@@ -28,6 +28,23 @@ function sleep(ms) {
 }
 
 /**
+ * Read and parse a JSON file with error handling
+ * @param {string} filePath - Path to the JSON file
+ * @returns {Object} Parsed JSON object
+ */
+function readJsonFile(filePath) {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`File not found: ${filePath}`);
+  }
+  const content = fs.readFileSync(filePath, 'utf8');
+  try {
+    return JSON.parse(content);
+  } catch (error) {
+    throw new Error(`Invalid JSON in ${filePath}: ${error.message}`);
+  }
+}
+
+/**
  * Fetch JSON from a URL with error handling
  * @param {string} url - URL to fetch
  * @returns {Promise<Object>} Parsed JSON response
@@ -92,7 +109,7 @@ async function updateSets() {
 
   // Read existing sets.json to preserve manual entries
   const setsPath = path.join(DATA_DIR, 'sets.json');
-  const existingSets = JSON.parse(fs.readFileSync(setsPath, 'utf8'));
+  const existingSets = readJsonFile(setsPath);
 
   // Update only recentSets, preserve other sections
   existingSets.recentSets = recentSets;
@@ -120,7 +137,7 @@ async function updateTypes() {
 
   // Read existing types.json to preserve manual entries
   const typesPath = path.join(DATA_DIR, 'types.json');
-  const existingTypes = JSON.parse(fs.readFileSync(typesPath, 'utf8'));
+  const existingTypes = readJsonFile(typesPath);
 
   // Update type arrays
   existingTypes.creatureTypes = creatureTypes.data.sort();
@@ -157,7 +174,7 @@ async function updateKeywords() {
 
   // Read existing keywords.json to preserve descriptions
   const keywordsPath = path.join(DATA_DIR, 'keywords.json');
-  const existingKeywords = JSON.parse(fs.readFileSync(keywordsPath, 'utf8'));
+  const existingKeywords = readJsonFile(keywordsPath);
 
   // Create a map of existing keywords with their descriptions
   const existingKeywordMap = new Map();
