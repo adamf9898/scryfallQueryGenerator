@@ -4,7 +4,8 @@
   "description": "A fluent API for building Scryfall search queries for Magic: The Gathering cards",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "update-data": "node scripts/update-scryfall-data.js"
   },
   "keywords": [
     "scryfall",

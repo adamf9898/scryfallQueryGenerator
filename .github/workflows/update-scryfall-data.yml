@@ -1,0 +1,56 @@
+name: Update Scryfall Data
+
+on:
+  # Run daily at 6:00 AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+  # Allow manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Update Scryfall data
+        run: npm run update-data
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code data/ || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.git-check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore: update Scryfall data'
+          title: 'chore: Update Scryfall data'
+          body: |
+            This PR updates the Scryfall data files with the latest information from the Scryfall API.
+
+            ## Updated Files
+            - `data/sets.json` - Recent sets
+            - `data/types.json` - Card types (creature types, artifact types, etc.)
+            - `data/keywords.json` - Keyword abilities and ability words
+
+            ---
+            *This PR was automatically created by the Update Scryfall Data workflow.*
+          branch: update-scryfall-data
+          delete-branch: true
+          labels: |
+            automated
+            data-update
