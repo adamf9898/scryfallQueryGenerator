@@ -1,24 +1,34 @@
 {
   "evergreen": [
     {
-      "name": "Flying",
-      "description": "Can only be blocked by creatures with flying or reach",
-      "reminder": "This creature can only be blocked by creatures with flying or reach."
+      "name": "Deathtouch",
+      "description": "Any amount of damage dealt by this is lethal",
+      "reminder": "Any amount of damage this deals to a creature is enough to destroy it."
     },
     {
-      "name": "First Strike",
-      "description": "Deals combat damage before creatures without first strike",
-      "reminder": "This creature deals combat damage before creatures without first strike."
+      "name": "Defender",
+      "description": "Cannot attack",
+      "reminder": "This creature can't attack."
     },
     {
-      "name": "Double Strike",
+      "name": "Double strike",
       "description": "Deals both first strike and regular combat damage",
       "reminder": "This creature deals both first-strike and regular combat damage."
     },
     {
-      "name": "Deathtouch",
-      "description": "Any amount of damage dealt by this is lethal",
-      "reminder": "Any amount of damage this deals to a creature is enough to destroy it."
+      "name": "First strike",
+      "description": "Deals combat damage before creatures without first strike",
+      "reminder": "This creature deals combat damage before creatures without first strike."
+    },
+    {
+      "name": "Flash",
+      "description": "Can be cast at instant speed",
+      "reminder": "You may cast this spell any time you could cast an instant."
+    },
+    {
+      "name": "Flying",
+      "description": "Can only be blocked by creatures with flying or reach",
+      "reminder": "This creature can only be blocked by creatures with flying or reach."
     },
     {
       "name": "Haste",
@@ -46,6 +56,11 @@
       "reminder": "This creature can't be blocked except by two or more creatures."
     },
     {
+      "name": "Protection",
+      "description": "Cannot be blocked, targeted, dealt damage, or enchanted by sources of the specified quality",
+      "reminder": "This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of the specified quality."
+    },
+    {
       "name": "Reach",
       "description": "Can block creatures with flying",
       "reminder": "This creature can block creatures with flying."
@@ -61,27 +76,17 @@
       "reminder": "Attacking doesn't cause this creature to tap."
     },
     {
-      "name": "Flash",
-      "description": "Can be cast at instant speed",
-      "reminder": "You may cast this spell any time you could cast an instant."
-    },
-    {
-      "name": "Defender",
-      "description": "Cannot attack",
-      "reminder": "This creature can't attack."
-    },
-    {
       "name": "Ward",
       "description": "Opponents pay a cost when targeting this",
       "reminder": "Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays the ward cost."
-    },
-    {
-      "name": "Protection",
-      "description": "Cannot be blocked, targeted, dealt damage, or enchanted by sources of the specified quality",
-      "reminder": "This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything of the specified quality."
     }
   ],
   "deciduous": [
+    {
+      "name": "Cycling",
+      "description": "Discard to draw a card",
+      "reminder": "You may pay the cycling cost and discard this card to draw a card."
+    },
     {
       "name": "Equip",
       "description": "Attach equipment to a creature you control",
@@ -91,6 +96,16 @@
       "name": "Fight",
       "description": "Two creatures deal damage equal to their power to each other",
       "reminder": "Each creature deals damage equal to its power to the other."
+    },
+    {
+      "name": "Flashback",
+      "description": "Cast from graveyard then exile",
+      "reminder": "You may cast this card from your graveyard for its flashback cost. Then exile it."
+    },
+    {
+      "name": "Kicker",
+      "description": "Optional additional cost for enhanced effect",
+      "reminder": "You may pay an additional cost as you cast this spell."
     },
     {
       "name": "Mill",
@@ -106,28 +121,58 @@
       "name": "Surveil",
       "description": "Look at top cards, may put in graveyard, rest on top",
       "reminder": "Look at the top cards of your library. You may put any number of them into your graveyard. Put the rest on top of your library in any order."
-    },
-    {
-      "name": "Cycling",
-      "description": "Discard to draw a card",
-      "reminder": "You may pay the cycling cost and discard this card to draw a card."
-    },
-    {
-      "name": "Kicker",
-      "description": "Optional additional cost for enhanced effect",
-      "reminder": "You may pay an additional cost as you cast this spell."
-    },
-    {
-      "name": "Flashback",
-      "description": "Cast from graveyard then exile",
-      "reminder": "You may cast this card from your graveyard for its flashback cost. Then exile it."
     }
   ],
   "common": [
     {
+      "name": "Abandon",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Absorb",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Activate",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Adapt",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Affinity",
       "description": "Costs less for each permanent of a type",
       "reminder": "This spell costs {1} less to cast for each permanent of the specified type you control."
+    },
+    {
+      "name": "Afflict",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Afterlife",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Aftermath",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Amass",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Amplify",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Annihilator",
@@ -135,9 +180,194 @@
       "reminder": "Whenever this creature attacks, defending player sacrifices that many permanents."
     },
     {
+      "name": "Ascend",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Assemble",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Assist",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Attach",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Augment",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Aura Swap",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Awaken",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Backup",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Banding",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Bargain",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Basic landcycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Battle Cry",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Behold",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Bestow",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Blitz",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Bloodthirst",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Boast",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Bolster",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Bushido",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Buyback",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Cascade",
       "description": "Exile cards until you exile a cheaper nonland card, may cast it free",
       "reminder": "When you cast this spell, exile cards from the top of your library until you exile a nonland card with lesser mana value. You may cast it without paying its mana cost."
+    },
+    {
+      "name": "Cast",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Casualty",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Champion",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Changeling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Choose a background",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Cipher",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Clash",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Cleave",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Cloak",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Collect evidence",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Commander ninjutsu",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Companion",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Compleated",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Conjure",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Connive",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Conspire",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Convert",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Convoke",
@@ -145,9 +375,139 @@
       "reminder": "Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color."
     },
     {
+      "name": "Counter",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Craft",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Create",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Crew",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Cumulative upkeep",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Dash",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Daybound",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Decayed",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Delve",
       "description": "Exile cards from graveyard to pay generic mana",
       "reminder": "Each card you exile from your graveyard while casting this spell pays for {1}."
+    },
+    {
+      "name": "Demonstrate",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Desertwalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Destroy",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Detain",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Dethrone",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Devoid",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Devour",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Discard",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Discover",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Disguise",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Disturb",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Doctor's companion",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Double",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Double agenda",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Double team",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Dredge",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Echo",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Embalm",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Emerge",
@@ -155,9 +515,84 @@
       "reminder": "You may cast this spell by sacrificing a creature and paying the emerge cost reduced by that creature's mana value."
     },
     {
+      "name": "Enchant",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Encore",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Endure",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Enlist",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Entwine",
       "description": "Pay extra to use all modes",
       "reminder": "Choose both if you pay the entwine cost."
+    },
+    {
+      "name": "Epic",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Escalate",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Escape",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Eternalize",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Evoke",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Evolve",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Exalted",
+      "description": "Creature attacking alone gets bonus",
+      "reminder": "Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn."
+    },
+    {
+      "name": "Exchange",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Exert",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Exhaust",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Exile",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Exploit",
@@ -165,9 +600,9 @@
       "reminder": "When this creature enters the battlefield, you may sacrifice a creature."
     },
     {
-      "name": "Exalted",
-      "description": "Creature attacking alone gets bonus",
-      "reminder": "Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn."
+      "name": "Explore",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Extort",
@@ -180,9 +615,79 @@
       "reminder": "When this creature enters the battlefield, put that many +1/+1 counters on it or create that many 1/1 colorless Servo artifact creature tokens."
     },
     {
+      "name": "Fading",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Fateseal",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Fear",
       "description": "Can only be blocked by artifact or black creatures",
       "reminder": "This creature can't be blocked except by artifact creatures and/or black creatures."
+    },
+    {
+      "name": "Flanking",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Food",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "For Mirrodin!",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Forage",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Forecast",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Forestcycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Forestwalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Foretell",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Fortify",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Freerunning",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Frenzy",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Friends forever",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Fuse",
@@ -190,9 +695,74 @@
       "reminder": "You may cast one or both halves of this card from your hand."
     },
     {
+      "name": "Gift",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Goad",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Graft",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Gravestorm",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Harmonize",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Haunt",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Heist",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Hexproof from",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Hidden agenda",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Hideaway",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Horsemanship",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Impending",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Improvise",
       "description": "Artifacts can help cast this spell",
       "reminder": "Your artifacts can help cast this spell. Each artifact you tap while casting this spell pays for {1}."
+    },
+    {
+      "name": "Incubate",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Infect",
@@ -200,12 +770,77 @@
       "reminder": "This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters."
     },
     {
+      "name": "Ingest",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Intensity",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Intimidate",
       "description": "Can only be blocked by artifact or same-color creatures",
       "reminder": "This creature can't be blocked except by artifact creatures and/or creatures that share a color with it."
     },
     {
-      "name": "Living Weapon",
+      "name": "Investigate",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Islandcycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Islandwalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Job select",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Jump-start",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Landcycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Landwalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Learn",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Legendary landwalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Level Up",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Living metal",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Living weapon",
       "description": "Equipment enters attached to a 0/0 Phyrexian Germ",
       "reminder": "When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it."
     },
@@ -215,9 +850,54 @@
       "reminder": "If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard."
     },
     {
+      "name": "Manifest",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Manifest dread",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Max speed",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Mayhem",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Megamorph",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Meld",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Melee",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Mentor",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Miracle",
       "description": "Can cast for reduced cost if it's first card drawn",
       "reminder": "You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn."
+    },
+    {
+      "name": "Mobilize",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Modular",
@@ -225,9 +905,34 @@
       "reminder": "This creature enters the battlefield with +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature."
     },
     {
+      "name": "Monstrosity",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "More Than Meets the Eye",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Morph",
       "description": "Cast face down, can turn face up later",
       "reminder": "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost."
+    },
+    {
+      "name": "Mountaincycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Mountainwalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Multikicker",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Mutate",
@@ -235,9 +940,24 @@
       "reminder": "If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it."
     },
     {
+      "name": "Myriad",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Nightbound",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Ninjutsu",
       "description": "Return an unblocked attacker to hand to put this onto battlefield",
       "reminder": "Pay the ninjutsu cost, return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking."
+    },
+    {
+      "name": "Nonbasic landwalk",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Offering",
@@ -245,9 +965,34 @@
       "reminder": "You may cast this card any time you could cast an instant by sacrificing a creature of the specified type and paying the difference in mana costs."
     },
     {
+      "name": "Offspring",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Open an Attraction",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Outlast",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Overload",
       "description": "Pay more to affect all valid targets",
       "reminder": "You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\""
+    },
+    {
+      "name": "Partner",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Partner with",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Persist",
@@ -260,9 +1005,54 @@
       "reminder": "This phases in or out before you untap during each of your untap steps."
     },
     {
+      "name": "Plainscycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Plainswalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Planeswalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Play",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Plot",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Poisonous",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Populate",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Proliferate",
       "description": "Add counters to permanents/players that have them",
       "reminder": "Choose any number of permanents and/or players, then give each another counter of each kind already there."
+    },
+    {
+      "name": "Prototype",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Provoke",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Prowess",
@@ -270,9 +1060,24 @@
       "reminder": "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."
     },
     {
-      "name": "Raid",
-      "description": "Bonus if you attacked this turn",
-      "reminder": "If you attacked this turn, this spell has an additional effect."
+      "name": "Prowl",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Rampage",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Ravenous",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Read Ahead",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Rebound",
@@ -280,9 +1085,24 @@
       "reminder": "If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost."
     },
     {
+      "name": "Reconfigure",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Recover",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Regenerate",
       "description": "Instead of dying, tap and remove from combat",
       "reminder": "The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat."
+    },
+    {
+      "name": "Reinforce",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Renown",
@@ -300,14 +1120,54 @@
       "reminder": "You may cast this card from your graveyard by discarding a land card in addition to paying its other costs."
     },
     {
-      "name": "Revolt",
-      "description": "Bonus if a permanent you controlled left battlefield",
-      "reminder": "If a permanent you controlled left the battlefield this turn, this spell has an additional effect."
+      "name": "Reveal",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Riot",
       "description": "Choose haste or +1/+1 counter when entering",
       "reminder": "This creature enters the battlefield with your choice of a +1/+1 counter or haste."
+    },
+    {
+      "name": "Ripple",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Role token",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Roll to Visit Your Attractions",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Sacrifice",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Saddle",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Scavenge",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Seek",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Set in motion",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Shadow",
@@ -320,9 +1180,19 @@
       "reminder": "This creature can't be the target of spells or abilities."
     },
     {
+      "name": "Shuffle",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Skulk",
       "description": "Can't be blocked by creatures with greater power",
       "reminder": "This creature can't be blocked by creatures with greater power."
+    },
+    {
+      "name": "Slivercycling",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Soulbond",
@@ -330,9 +1200,44 @@
       "reminder": "You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them."
     },
     {
+      "name": "Soulshift",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Specialize",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Spectacle",
       "description": "Alternate cost if opponent lost life",
       "reminder": "You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn."
+    },
+    {
+      "name": "Splice",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Split second",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Spree",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Squad",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Station",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Storm",
@@ -340,14 +1245,54 @@
       "reminder": "When you cast this spell, copy it for each spell cast before it this turn. You may choose new targets for the copies."
     },
     {
+      "name": "Sunburst",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Support",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Surge",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Suspect",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Suspend",
       "description": "Exile with time counters, cast when last counter removed",
       "reminder": "Rather than cast this card from your hand, pay the suspend cost and exile it with time counters. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost."
     },
     {
-      "name": "Totem Armor",
-      "description": "Instead of enchanted creature being destroyed, destroy aura",
-      "reminder": "If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura."
+      "name": "Swampcycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Swampwalk",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Tap",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Time Travel",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Toxic",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Training",
@@ -370,9 +1315,29 @@
       "reminder": "Pay the transmute cost, discard this card: Search your library for a card with the same mana value, reveal it, put it into your hand, then shuffle."
     },
     {
+      "name": "Treasure",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Tribute",
       "description": "Opponent may put counters to prevent effect",
       "reminder": "As this creature enters the battlefield, an opponent of your choice may put +1/+1 counters on it. If they don't, this creature has an ability."
+    },
+    {
+      "name": "Typecycling",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Umbra armor",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Undaunted",
+      "description": "",
+      "reminder": ""
     },
     {
       "name": "Undying",
@@ -385,24 +1350,115 @@
       "reminder": "Pay the unearth cost: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield."
     },
     {
+      "name": "Unleash",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Untap",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Vanishing",
       "description": "Time counters, sacrifice when last removed",
       "reminder": "This permanent enters the battlefield with time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it."
     },
     {
+      "name": "Venture into the dungeon",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Vote",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Warp",
+      "description": "",
+      "reminder": ""
+    },
+    {
+      "name": "Web-slinging",
+      "description": "",
+      "reminder": ""
+    },
+    {
       "name": "Wither",
       "description": "Damage dealt is in form of -1/-1 counters",
       "reminder": "This deals damage to creatures in the form of -1/-1 counters."
+    },
+    {
+      "name": "Wizardcycling",
+      "description": "",
+      "reminder": ""
     }
   ],
   "abilityWords": [
-    "Addendum", "Alliance", "Battalion", "Bloodrush", "Channel", "Chroma",
-    "Cohort", "Constellation", "Converge", "Coven", "Delirium", "Domain",
-    "Eminence", "Enrage", "Fateful Hour", "Ferocious", "Formidable", "Grandeur",
-    "Hellbent", "Heroic", "Imprint", "Inspired", "Kinship", "Landfall",
-    "Lieutenant", "Magecraft", "Metalcraft", "Morbid", "Pack Tactics",
-    "Parley", "Radiance", "Revolt", "Secret Council", "Spell Mastery",
-    "Strive", "Sweep", "Tempting Offer", "Threshold", "Undergrowth",
-    "Will of the Council"
+    "Adamant",
+    "Addendum",
+    "Alliance",
+    "Battalion",
+    "Bloodrush",
+    "Celebration",
+    "Channel",
+    "Chroma",
+    "Cohort",
+    "Constellation",
+    "Converge",
+    "Corrupted",
+    "Council's dilemma",
+    "Coven",
+    "Delirium",
+    "Descend",
+    "Domain",
+    "Eerie",
+    "Eminence",
+    "Enrage",
+    "Fateful hour",
+    "Fathomless descent",
+    "Ferocious",
+    "Flurry",
+    "Formidable",
+    "Grandeur",
+    "Hellbent",
+    "Hero's Reward",
+    "Heroic",
+    "Imprint",
+    "Inspired",
+    "Join forces",
+    "Kinfall",
+    "Kinship",
+    "Landfall",
+    "Landship",
+    "Legacy",
+    "Lieutenant",
+    "Magecraft",
+    "Metalcraft",
+    "Morbid",
+    "Pack tactics",
+    "Paradox",
+    "Parley",
+    "Radiance",
+    "Raid",
+    "Rally",
+    "Renew",
+    "Revolt",
+    "Secret council",
+    "Spell mastery",
+    "Start your engines!",
+    "Strive",
+    "Survival",
+    "Sweep",
+    "Teamwork",
+    "Tempting offer",
+    "Threshold",
+    "Underdog",
+    "Undergrowth",
+    "Valiant",
+    "Void",
+    "Will of the Planeswalkers",
+    "Will of the council"
   ]
 }
